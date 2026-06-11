@@ -1,0 +1,3800 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ÓNIX Woman · Mérida · Yucatán · 20 al 23 de agosto</title>
+    <meta name="description" content="Una experiencia privada de 4 días / 3 noches para solo 8 mujeres. Mérida · Yucatán · 20 al 23 de agosto · Inversión 9.800 €.">
+    <meta property="og:title" content="ÓNIX Woman">
+    <meta property="og:description" content="Una experiencia privada para mujeres que lo sostienen todo y desean volver a sí mismas. Solo 8 mujeres · Mérida · Yucatán · 20 al 23 de agosto.">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- GSAP -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script>
+        const localImageExtensions = ['webp', 'avif', 'png', 'jpg', 'jpeg', 'jfif', 'gif', 'svg', 'bmp'];
+
+        document.addEventListener('error', event => {
+            const image = event.target;
+            if (!(image instanceof HTMLImageElement) || !image.dataset.imageBase) return;
+
+            const nextAttempt = Number(image.dataset.imageAttempt || 0) + 1;
+            if (nextAttempt < localImageExtensions.length) {
+                image.dataset.imageAttempt = nextAttempt;
+                image.src = `${image.dataset.imageBase}.${localImageExtensions[nextAttempt]}`;
+                return;
+            }
+
+            const fallback = image.dataset.imageFallback;
+            image.removeAttribute('data-image-base');
+            if (fallback) image.src = fallback;
+        }, true);
+    </script>
+
+    <style>
+        /* ========================================
+           CSS RESET & VARIABLES
+        ======================================== */
+        :root {
+            --bg-warm: #EDE9E4;
+            --bg-dark: #170F0B;
+            --text-dark: #170F0B;
+            --text-light: #EDE9E4;
+            --text-muted: #7A6F6A;
+            --text-muted-light: #BDB4AF;
+            --accent: #C7C7C7;
+            --separator: #BDB4AF;
+            --font-serif: 'Instrument Serif', Georgia, serif;
+            --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+        }
+
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        body {
+            font-family: var(--font-sans);
+            background-color: var(--bg-warm);
+            color: var(--text-dark);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        img {
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        /* ========================================
+           NAVBAR
+        ======================================== */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 24px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            mix-blend-mode: difference;
+            transition: padding 0.4s ease;
+        }
+
+        .navbar-logo {
+            font-family: var(--font-sans);
+            font-weight: 600;
+            font-size: 14px;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: #EDE9E4;
+        }
+
+        .navbar-hamburger {
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            z-index: 1001;
+        }
+
+        .navbar-hamburger span {
+            display: block;
+            width: 28px;
+            height: 1.5px;
+            background-color: #EDE9E4;
+            transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1), opacity 0.3s ease;
+        }
+
+        .navbar-hamburger.active span:first-child {
+            transform: translateY(3.75px) rotate(45deg);
+        }
+
+        .navbar-hamburger.active span:last-child {
+            transform: translateY(-3.75px) rotate(-45deg);
+        }
+
+        /* Mobile Menu Overlay */
+        .mobile-menu {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: var(--bg-dark);
+            z-index: 999;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 0;
+            padding: 96px 32px 48px;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
+        .mobile-menu.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        .mobile-menu a {
+            font-family: var(--font-serif);
+            font-size: clamp(34px, 4vw, 48px);
+            line-height: 1;
+            color: var(--text-light);
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.5s ease, transform 0.5s ease, color 0.3s ease;
+        }
+
+        .mobile-menu.active a {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .mobile-menu.active a:nth-child(1) { transition-delay: 0.1s; }
+        .mobile-menu.active a:nth-child(2) { transition-delay: 0.15s; }
+        .mobile-menu.active a:nth-child(3) { transition-delay: 0.2s; }
+        .mobile-menu.active a:nth-child(4) { transition-delay: 0.25s; }
+        .mobile-menu.active a:nth-child(5) { transition-delay: 0.3s; }
+        .mobile-menu.active a:nth-child(6) { transition-delay: 0.35s; }
+
+        .mobile-menu a:hover {
+            color: var(--text-muted-light);
+        }
+
+        .mobile-menu-links {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: clamp(20px, 2.2vh, 30px);
+        }
+
+        .mobile-menu-meta {
+            margin-top: clamp(40px, 6vh, 64px);
+            padding-top: 22px;
+            border-top: 1px solid rgba(237, 233, 228, 0.12);
+            font-family: var(--font-sans);
+            font-size: 10px;
+            line-height: 1.8;
+            letter-spacing: 0.2em;
+            text-align: center;
+            text-transform: uppercase;
+            color: var(--text-muted-light);
+            opacity: 0;
+            transform: translateY(16px);
+            transition: opacity 0.45s ease 0.38s, transform 0.45s ease 0.38s;
+        }
+
+        .mobile-menu.active .mobile-menu-meta {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        @media (max-width: 600px) {
+            .mobile-menu {
+                padding: 88px 24px 38px;
+            }
+
+            .mobile-menu a {
+                font-size: clamp(30px, 9vw, 36px);
+            }
+
+            .mobile-menu-links {
+                gap: clamp(18px, 2.8vh, 26px);
+            }
+
+            .mobile-menu-meta {
+                margin-top: 36px;
+                padding-top: 18px;
+                font-size: 9px;
+                letter-spacing: 0.16em;
+            }
+        }
+
+        /* ========================================
+           SECTION UTILITIES
+        ======================================== */
+        .section {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .section-beige {
+            background-color: var(--bg-warm);
+        }
+
+        .section-dark {
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+        }
+
+        body > section:not(.hero),
+        body > .section-separator {
+            position: relative;
+            z-index: 2;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 50px;
+        }
+
+        .text-link {
+            font-family: var(--font-sans);
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: -0.12px;
+            text-transform: uppercase;
+            text-decoration: underline;
+            display: inline-block;
+            transition: opacity 0.3s ease;
+            cursor: pointer;
+        }
+
+        .text-link:hover {
+            opacity: 0.6;
+        }
+
+        /* Blur-fade-in default state */
+        .reveal {
+            opacity: 0;
+            filter: blur(8px);
+            transform: translateY(30px);
+        }
+
+        /* Ornamental background character */
+        .ornament {
+            position: absolute;
+            font-family: var(--font-serif);
+            font-size: clamp(200px, 35vw, 500px);
+            color: var(--text-dark);
+            opacity: 0.03;
+            pointer-events: none;
+            user-select: none;
+            line-height: 1;
+            z-index: 0;
+        }
+
+        .ornament-light {
+            color: var(--text-light);
+            opacity: 0.04;
+        }
+
+        /* Section separator line */
+        .section-separator {
+            width: 100%;
+            height: 1px;
+            background-color: var(--separator);
+            border: none;
+            margin: 0;
+        }
+
+        .section-separator.reserva-transition {
+            height: clamp(46px, 4vw, 68px);
+            background: linear-gradient(
+                180deg,
+                var(--bg-warm) 0%,
+                #f0ebe4 42%,
+                #f7f2ec 74%,
+                #fbf8f3 100%
+            );
+        }
+
+        /* ========================================
+           1. HERO
+        ======================================== */
+        .hero {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            min-height: 700px;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            overflow: hidden;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .hero + .section-separator {
+            margin-top: 100vh;
+        }
+
+        .hero-image-wrapper {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 120%;
+            z-index: 0;
+        }
+
+        .hero-image-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                180deg,
+                rgba(23, 15, 11, 0.15) 0%,
+                rgba(23, 15, 11, 0.05) 40%,
+                rgba(23, 15, 11, 0.45) 75%,
+                rgba(23, 15, 11, 0.8) 100%
+            );
+            z-index: 1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            padding: 0 40px 20px;
+            color: var(--text-light);
+        }
+
+        .hero-tagline {
+            font-family: var(--font-sans);
+            font-size: clamp(12px, 1.3vw, 15px);
+            font-weight: 400;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            text-align: center;
+            margin-bottom: 40px;
+            opacity: 0;
+        }
+
+        .hero-title {
+            font-family: var(--font-serif);
+            font-size: clamp(108px, 15vw, 216px);
+            font-weight: 400;
+            line-height: 0.85;
+            letter-spacing: -0.03em;
+            text-align: center;
+            opacity: 0;
+        }
+
+        .hero-title em {
+            font-style: italic;
+        }
+
+        .hero-subtitle {
+            font-family: var(--font-sans);
+            font-size: clamp(11px, 1.1vw, 14px);
+            font-weight: 400;
+            letter-spacing: 0.35em;
+            text-transform: uppercase;
+            text-align: center;
+            margin-top: 28px;
+            color: var(--text-muted-light);
+            opacity: 0;
+        }
+
+        /* ========================================
+           2. BIENVENIDA
+        ======================================== */
+        .bienvenida {
+            padding: 140px 0;
+        }
+
+        .bienvenida-inner {
+            max-width: 1000px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .bienvenida h2 {
+            font-family: var(--font-serif);
+            font-size: clamp(32px, 5vw, 60px);
+            font-weight: 400;
+            line-height: 1.1;
+            margin-bottom: 48px;
+        }
+
+        .bienvenida h2 em {
+            display: block;
+            font-style: italic;
+            margin-top: 12px;
+        }
+
+        .bienvenida p {
+            font-family: var(--font-sans);
+            font-size: clamp(14px, 1.3vw, 18px);
+            line-height: 1.8;
+            color: var(--text-muted);
+            max-width: 680px;
+            margin: 0 auto 56px;
+        }
+
+        /* ========================================
+           3. EL MÃ‰TODO â€” PILARES
+        ======================================== */
+        .metodo {
+            padding: 120px 0 140px;
+        }
+
+        .pilar {
+            position: relative;
+            margin-bottom: clamp(80px, 10vw, 140px);
+        }
+
+        .pilar:last-child {
+            margin-bottom: 0;
+        }
+
+        .pilar-image-wrapper {
+            position: relative;
+            width: 100%;
+            height: clamp(400px, 70vh, 85vh);
+            overflow: hidden;
+        }
+
+        .pilar-image-wrapper img {
+            width: 100%;
+            height: 120%;
+            object-fit: cover;
+            will-change: transform;
+        }
+
+        .pilar-image-clip {
+            clip-path: inset(100% 0 0 0);
+        }
+
+        .pilar-content {
+            padding: 40px 50px 0;
+            display: flex;
+            gap: 30px;
+            align-items: flex-start;
+            position: relative;
+        }
+
+        .pilar-ornament {
+            position: absolute;
+            right: 40px;
+            top: -120px;
+            font-family: var(--font-serif);
+            font-size: clamp(150px, 25vw, 350px);
+            color: var(--text-dark);
+            opacity: 0.03;
+            pointer-events: none;
+            user-select: none;
+            line-height: 1;
+            z-index: 0;
+        }
+
+        .pilar-title {
+            font-family: var(--font-serif);
+            font-size: clamp(28px, 4vw, 48px);
+            font-weight: 400;
+            line-height: 1;
+            letter-spacing: -1.92px;
+            min-width: 200px;
+        }
+
+        .pilar-title em {
+            font-style: italic;
+        }
+
+        .pilar-desc {
+            font-family: var(--font-sans);
+            font-size: clamp(14px, 1.2vw, 18px);
+            line-height: 1.6;
+            color: var(--text-muted);
+            max-width: 500px;
+            padding-top: 8px;
+        }
+
+        /* ========================================
+           SERVICIOS PERSONALIZADOS
+        ======================================== */
+        .servicios-section {
+            min-height: auto;
+            background: #ebe7df;
+            color: #111111;
+            overflow: visible;
+        }
+
+        .servicios-sticky {
+            position: relative;
+            height: auto;
+            min-height: auto;
+            padding: clamp(76px, 9vh, 104px) 0 clamp(48px, 6vh, 72px);
+            overflow: visible;
+        }
+
+        .servicios-inner,
+        .servicios-list-viewport {
+            width: min(88vw, 1600px);
+            margin: 0 auto;
+        }
+
+        .servicios-heading {
+            text-align: center;
+            margin: 0 auto clamp(90px, 12vh, 130px);
+        }
+
+        .servicios-title {
+            font-family: var(--font-serif);
+            font-weight: 400;
+            line-height: 0.84;
+            letter-spacing: 0;
+            color: #111111;
+            margin: 0;
+        }
+
+        .servicios-title-line {
+            display: block;
+        }
+
+        .servicios-title-line:first-child {
+            font-size: clamp(86px, 6.2vw, 110px);
+        }
+
+        .servicios-title-line:last-child {
+            font-size: clamp(72px, 5.2vw, 92px);
+            font-style: italic;
+        }
+
+        .servicios-list-viewport {
+            overflow: visible;
+            padding-bottom: clamp(72px, 9vh, 120px);
+        }
+
+        .servicios-list {
+            position: relative;
+            will-change: transform;
+        }
+
+        .servicio-item {
+            --reveal-left: 0%;
+            --reveal-right: 0%;
+            position: relative;
+            background: #ebe7df;
+            border-top: 1px solid #cfc8bd;
+            clip-path: polygon(0 var(--reveal-left), 100% var(--reveal-right), 100% 100%, 0 100%);
+            transform-origin: 50% 0%;
+            will-change: transform, clip-path;
+        }
+
+        .servicio-item:last-child {
+            border-bottom: 1px solid #cfc8bd;
+        }
+
+        .servicio-reveal {
+            display: grid;
+            grid-template-columns: 70px minmax(260px, 1.1fr) minmax(260px, 1.1fr) minmax(360px, 440px);
+            gap: clamp(32px, 4vw, 76px);
+            align-items: start;
+            padding: 24px 0;
+            transform-origin: 50% 0%;
+            will-change: transform;
+        }
+
+        .servicio-num {
+            font-family: var(--font-sans);
+            font-size: 20px;
+            line-height: 1;
+            color: #111111;
+            padding-top: 6px;
+        }
+
+        .servicio-title {
+            font-family: var(--font-serif);
+            font-size: clamp(52px, 4.2vw, 64px);
+            font-weight: 400;
+            line-height: 0.95;
+            letter-spacing: 0;
+            color: #111111;
+            margin: 0;
+        }
+
+        .servicio-desc {
+            font-family: var(--font-sans);
+            font-size: clamp(19px, 1.35vw, 22px);
+            line-height: 1.18;
+            color: #111111;
+            margin: 0;
+            max-width: 360px;
+            padding-top: 2px;
+        }
+
+        .servicio-image-wrap {
+            width: 100%;
+            height: clamp(260px, 19vw, 300px);
+            overflow: hidden;
+            justify-self: end;
+        }
+
+        .servicio-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* ========================================
+           4 & 7. TEXTO CINÃ‰TICO
+        ======================================== */
+        .kinetic-section {
+            position: relative;
+            height: 62vh;
+            min-height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .kinetic-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 120%;
+            z-index: 0;
+        }
+
+        .kinetic-bg img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .kinetic-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(23, 15, 11, 0.55);
+            z-index: 1;
+        }
+
+        .kinetic-content {
+            position: relative;
+            z-index: 2;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .kinetic-row {
+            display: flex;
+            justify-content: center;
+            align-items: baseline;
+            gap: 0.35em;
+            width: 100%;
+            padding: 0 40px;
+            position: relative;
+        }
+
+        .kinetic-word {
+            font-family: var(--font-serif);
+            font-size: clamp(48px, 10vw, 140px);
+            font-weight: 400;
+            color: var(--text-light);
+            line-height: 1;
+            white-space: nowrap;
+            opacity: 0;
+            will-change: filter, opacity;
+        }
+
+        @media (min-width: 901px) {
+            .kinetic-row {
+                gap: clamp(16px, 1.8vw, 28px);
+            }
+
+            .kinetic-word {
+                word-spacing: clamp(16px, 1.8vw, 28px);
+            }
+        }
+
+        .kinetic-word em {
+            font-style: italic;
+        }
+
+        .kinetic-center {
+            font-family: var(--font-sans);
+            font-size: clamp(11px, 1.1vw, 13px);
+            font-weight: 400;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            color: var(--text-muted-light);
+            text-align: center;
+            margin-top: 32px;
+        }
+
+        #kinetic2 .kinetic-word {
+            font-size: clamp(54px, 10.8vw, 152px);
+        }
+
+        #kinetic2 .kinetic-center {
+            font-size: clamp(12px, 1.2vw, 15px);
+            line-height: 1.65;
+        }
+
+        /* ========================================
+           5. EL PROGRAMA â€” DÃAS
+        ======================================== */
+        .programa {
+            padding: 140px 0;
+        }
+
+        .programa-header {
+            text-align: center;
+            margin-bottom: clamp(96px, 9vw, 136px);
+        }
+
+        .programa-header h2 {
+            font-family: var(--font-serif);
+            font-size: clamp(40px, 5.5vw, 80px);
+            font-weight: 400;
+            line-height: 1.1;
+        }
+
+        .programa-header h2 em {
+            display: block;
+            max-width: 760px;
+            margin: 26px auto 0;
+            font-family: var(--font-sans);
+            font-size: clamp(14px, 1.35vw, 18px);
+            font-style: italic;
+            font-weight: 400;
+            line-height: 1.8;
+            color: var(--text-muted);
+        }
+
+        .dia {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: clamp(40px, 6vw, 100px);
+            padding: clamp(48px, 5vw, 70px) 0;
+            border-top: 1px solid var(--separator);
+        }
+
+        .dia-left {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .dia-number {
+            font-family: var(--font-serif);
+            font-size: clamp(64px, 8vw, 120px);
+            font-weight: 400;
+            line-height: 1;
+            color: var(--text-dark);
+            opacity: 0.12;
+            margin-bottom: 16px;
+        }
+
+        .dia-title {
+            font-family: var(--font-serif);
+            font-size: clamp(28px, 3.5vw, 48px);
+            font-weight: 400;
+            line-height: 1.1;
+            letter-spacing: -1.92px;
+        }
+
+        .dia-title em {
+            font-style: italic;
+        }
+
+        .dia-subtitle {
+            font-family: var(--font-sans);
+            font-size: 12px;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            margin-top: 8px;
+        }
+
+        .dia-right {
+            padding-top: 8px;
+        }
+
+        .dia-right ul {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .dia-right li {
+            font-family: var(--font-sans);
+            font-size: clamp(14px, 1.2vw, 16px);
+            line-height: 1.7;
+            color: var(--text-muted);
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .dia-right li::before {
+            content: '·';
+            position: absolute;
+            left: 0;
+            color: var(--text-dark);
+            font-weight: 600;
+        }
+
+        /* ========================================
+           6. CHEF RHÂ·ORIGEN
+        ======================================== */
+        .chef {
+            position: relative;
+            height: 82vh;
+            min-height: 560px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .chef-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 120%;
+            z-index: 0;
+        }
+
+        .chef-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                180deg,
+                rgba(23, 15, 11, 0.36) 0%,
+                rgba(23, 15, 11, 0.64) 100%
+            );
+            z-index: 1;
+        }
+
+        .chef-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            max-width: 800px;
+            padding: 0 40px;
+        }
+
+        .chef-content h2 {
+            font-family: var(--font-serif);
+            font-size: clamp(40px, 6vw, 80px);
+            font-weight: 400;
+            line-height: 1.1;
+            color: var(--text-light);
+            margin-bottom: 32px;
+        }
+
+        .chef-content h2 em {
+            font-style: italic;
+        }
+
+        .chef-label {
+            font-family: var(--font-sans);
+            font-size: 11px;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            color: var(--text-muted-light);
+            margin-bottom: 24px;
+        }
+
+        .chef-content p {
+            font-family: var(--font-sans);
+            font-size: clamp(14px, 1.3vw, 18px);
+            line-height: 1.8;
+            color: var(--text-muted-light);
+            max-width: 520px;
+            margin: 0 auto;
+        }
+
+        /* ========================================
+           5. EDITORIAL RETREAT SPACES
+        ======================================== */
+        .retreat-editorial {
+            position: relative;
+            background: #ede9e3;
+            overflow: hidden;
+            padding: 0 0 150px;
+        }
+
+        .retreat-editorial-bg {
+            position: absolute;
+            inset: 0;
+            z-index: 0;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        .retreat-watermark {
+            position: absolute;
+            top: 5%;
+            left: 4%;
+            width: 92vw;
+            height: 92vw;
+            max-height: 1500px;
+            color: rgba(23, 15, 11, 0.055);
+            will-change: transform;
+        }
+
+        .retreat-watermark svg {
+            width: 100%;
+            height: 100%;
+            overflow: visible;
+        }
+
+        .retreat-editorial-inner {
+            position: relative;
+            z-index: 2;
+            max-width: 1500px;
+            margin: 0 auto;
+            padding: 0 6vw;
+        }
+
+        .retreat-intro {
+            text-align: center;
+            padding: 150px 0 145px;
+        }
+
+        .retreat-intro h2 {
+            font-family: var(--font-serif);
+            font-size: clamp(54px, 6vw, 78px);
+            font-weight: 400;
+            line-height: 0.9;
+            color: #111111;
+            margin: 0;
+        }
+
+        .retreat-intro h2 em {
+            font-style: italic;
+        }
+
+        .retreat-block {
+            position: relative;
+            display: grid;
+            grid-template-columns: 280px minmax(0, 1fr);
+            gap: clamp(80px, 8vw, 120px);
+            align-items: start;
+            min-height: 790px;
+            margin-bottom: 96px;
+        }
+
+        .retreat-copy {
+            max-width: 280px;
+            padding-top: 120px;
+            position: relative;
+            z-index: 3;
+        }
+
+        .retreat-copy h3 {
+            font-family: var(--font-serif);
+            font-size: clamp(30px, 2.5vw, 38px);
+            font-weight: 400;
+            line-height: 0.95;
+            color: #111111;
+            margin: 0;
+        }
+
+        .retreat-copy p {
+            font-family: var(--font-sans);
+            font-size: 14px;
+            line-height: 1.38;
+            color: #33302d;
+            margin: 24px 0 18px;
+        }
+
+        .retreat-copy a {
+            font-family: var(--font-sans);
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 0.02em;
+            text-transform: uppercase;
+            color: #111111;
+            text-decoration: underline;
+            text-underline-offset: 3px;
+        }
+
+        .retreat-images {
+            position: relative;
+            min-height: 700px;
+            z-index: 2;
+        }
+
+        .retreat-image-main,
+        .retreat-image-secondary {
+            position: absolute;
+            overflow: hidden;
+            will-change: transform;
+            backface-visibility: hidden;
+        }
+
+        .retreat-image-main {
+            top: 0;
+            right: 0;
+            width: min(58vw, 860px);
+            height: clamp(560px, 50vw, 650px);
+        }
+
+        .retreat-image-secondary {
+            left: 0;
+            bottom: 0;
+            width: clamp(300px, 25vw, 380px);
+            height: clamp(205px, 18vw, 260px);
+            z-index: 3;
+        }
+
+        .retreat-image-main img,
+        .retreat-image-secondary img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transform: translateZ(0);
+            will-change: transform;
+        }
+
+        .retreat-block:nth-child(even) .retreat-copy {
+            padding-top: 88px;
+        }
+
+        @media (max-width: 900px) {
+            .retreat-editorial {
+                padding-bottom: 92px;
+            }
+
+            .retreat-editorial-inner {
+                padding: 0 20px;
+            }
+
+            .retreat-intro {
+                position: relative;
+                top: auto;
+                right: auto;
+                z-index: auto;
+                width: auto;
+                padding: 104px 0 84px;
+                text-align: center;
+                pointer-events: auto;
+            }
+
+            .retreat-intro h2 {
+                font-size: clamp(42px, 12vw, 54px);
+                line-height: 0.9;
+            }
+
+            .retreat-block {
+                display: flex;
+                flex-direction: column;
+                gap: 26px;
+                min-height: 0;
+                margin-bottom: 82px;
+            }
+
+            .retreat-copy,
+            .retreat-block:nth-child(even) .retreat-copy {
+                max-width: 100%;
+                padding-top: 0;
+                order: 2;
+            }
+
+            .retreat-images {
+                width: 94%;
+                min-height: 500px;
+                margin: 0 auto;
+                order: 1;
+            }
+
+            .retreat-image-main {
+                width: 100%;
+                height: 400px;
+                position: relative;
+                inset: auto;
+            }
+
+            .retreat-image-secondary {
+                position: absolute;
+                width: 54%;
+                height: 190px;
+                left: auto;
+                right: -8px;
+                bottom: 0;
+                margin-top: 0;
+            }
+        }
+
+        /* ========================================
+           NEW: EVERY DAY DESIGNED FOR YOU
+        ======================================== */
+        .everyday-section {
+            min-height: 360vh;
+            margin: 0;
+            border-top: 110px solid #ebe7df;
+            border-bottom: 120px solid #ebe7df;
+            background: #ebe7df;
+            color: #111111;
+            overflow: visible;
+        }
+
+        .everyday-sticky {
+            position: sticky;
+            top: 0;
+            height: 100vh;
+            min-height: 100vh;
+            padding: clamp(28px, 4vh, 48px) 50px clamp(28px, 4vh, 48px);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            overflow: hidden;
+        }
+
+        .everyday-heading {
+            text-align: center;
+            margin: 0 auto 70px;
+            flex: 0 0 auto;
+            visibility: visible !important;
+            will-change: transform, opacity;
+        }
+
+        .everyday-heading h2 {
+            font-family: var(--font-serif);
+            font-size: clamp(64px, 4.8vw, 82px);
+            font-weight: 400;
+            color: #111111;
+            text-align: center;
+            line-height: 0.9;
+            letter-spacing: 0;
+            margin: 0;
+        }
+
+        .everyday-heading h2.italic-line {
+            font-style: italic;
+        }
+
+        .everyday-layout {
+            display: grid;
+            grid-template-columns: minmax(420px, 0.45fr) minmax(520px, 0.55fr);
+            gap: clamp(56px, 6vw, 96px);
+            align-items: start;
+            width: min(88vw, 1580px);
+            margin: 0 auto;
+        }
+
+        .everyday-sticky-col {
+            width: 100%;
+        }
+
+        .everyday-sticky-img-wrapper {
+            position: relative;
+            width: min(100%, 600px);
+            height: clamp(390px, calc(100vh - 275px), 680px);
+            min-height: clamp(390px, calc(100vh - 275px), 680px);
+            max-height: clamp(390px, calc(100vh - 275px), 680px);
+            overflow: hidden;
+            clip-path: inset(0 0 14% 0);
+            will-change: clip-path;
+        }
+
+        .everyday-sticky-img-wrapper img {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        .everyday-sticky-img-wrapper img.active {
+            opacity: 1;
+        }
+
+        .everyday-list-col {
+            position: relative;
+            padding-top: 28px;
+            will-change: transform;
+        }
+
+        .everyday-list-panel {
+            min-width: 0;
+            will-change: transform;
+        }
+
+        .activity-item {
+            padding: 28px 0;
+            border-top: 1px solid #cfc8bd;
+            transform-origin: 0 50%;
+            will-change: color;
+        }
+
+        .activity-item:last-child {
+            border-bottom: 1px solid #cfc8bd;
+        }
+
+        .activity-item h3 {
+            font-family: var(--font-serif);
+            font-size: clamp(54px, 4.4vw, 68px);
+            font-weight: 400;
+            letter-spacing: 0;
+            line-height: 1;
+            color: #c7c7c7;
+            margin: 0;
+            transition: color 0.32s ease;
+        }
+
+        .activity-item.active h3 {
+            color: #111111;
+        }
+
+        .everyday-footer {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+            max-width: 360px;
+            margin-top: 42px;
+        }
+
+        .everyday-footer p {
+            font-family: var(--font-sans);
+            font-size: 15px;
+            line-height: 1.25;
+            color: #111111;
+            text-align: left;
+            margin: 0;
+        }
+
+        .everyday-footer a {
+            font-family: var(--font-sans);
+            font-size: 14px;
+            font-weight: 600;
+            letter-spacing: 0;
+            text-transform: uppercase;
+            color: #111111;
+            text-decoration: none;
+            border-bottom: 1px solid #111111;
+            width: fit-content;
+        }
+
+        .everyday-footer a:hover {
+            opacity: 1;
+        }
+
+        /* ========================================
+           8. LA EXPERIENCIA
+        ======================================== */
+        .experiencia {
+            position: relative;
+            height: 100vh;
+            min-height: 700px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .experiencia-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 120%;
+            z-index: 0;
+        }
+
+        .experiencia-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(23, 15, 11, 0.4);
+            z-index: 1;
+        }
+
+        .experiencia-card {
+            position: relative;
+            z-index: 2;
+            background: rgba(237, 233, 228, 0.95);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            padding: clamp(48px, 5vw, 72px) clamp(36px, 4vw, 64px);
+            max-width: 520px;
+            width: 90%;
+            text-align: center;
+        }
+
+        .experiencia-card .ornament-diamond {
+            font-size: 18px;
+            color: var(--text-dark);
+            opacity: 0.3;
+            margin-bottom: 32px;
+        }
+
+        .experiencia-card h3 {
+            font-family: var(--font-serif);
+            font-size: clamp(28px, 3.5vw, 48px);
+            font-weight: 400;
+            line-height: 1.2;
+            margin-bottom: 16px;
+        }
+
+        .experiencia-card h3 em {
+            font-style: italic;
+        }
+
+        .experiencia-stats {
+            font-family: var(--font-sans);
+            font-size: clamp(12px, 1.1vw, 14px);
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            margin-bottom: 24px;
+        }
+
+        .experiencia-access {
+            font-family: var(--font-sans);
+            font-size: clamp(13px, 1.1vw, 15px);
+            color: var(--text-muted);
+            line-height: 1.7;
+            margin-bottom: 40px;
+        }
+
+        /* ========================================
+           8.5 GALERÃA â€” Carrusel horizontal
+        ======================================== */
+        .gallery-section {
+            min-height: 128vh;
+            padding: 150px 0 72px;
+            background: var(--bg-warm);
+            overflow: hidden;
+        }
+
+        .gallery-header {
+            text-align: center;
+            padding: 0 50px;
+            margin-bottom: 92px;
+        }
+
+        .gallery-header h2 {
+            font-family: var(--font-serif);
+            font-size: clamp(48px, 6vw, 90px);
+            font-weight: 400;
+            line-height: 0.9;
+            color: #111;
+        }
+
+        .gallery-header h2.italic-line {
+            font-style: italic;
+        }
+
+        .gallery-header p {
+            font-family: var(--font-sans);
+            font-size: clamp(14px, 1.2vw, 16px);
+            line-height: 1.7;
+            color: var(--text-muted);
+            max-width: 520px;
+            margin: 28px auto 32px;
+        }
+
+        .gallery-header a {
+            font-family: var(--font-sans);
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            color: var(--text-dark);
+            text-decoration: underline;
+            text-underline-offset: 3px;
+            display: inline-block;
+            transition: opacity 0.3s ease;
+        }
+
+        .gallery-header a:hover {
+            opacity: 0.5;
+        }
+
+        .gallery-carousel {
+            width: 100%;
+            overflow: hidden;
+            cursor: grab;
+            padding: 40px 0 48px;
+            user-select: none;
+            touch-action: pan-y;
+            -webkit-user-select: none;
+            -webkit-touch-callout: none;
+        }
+
+        .gallery-carousel:active {
+            cursor: grabbing;
+        }
+
+        .gallery-track {
+            display: flex;
+            gap: 36px;
+            padding: 0;
+            cursor: grab;
+            user-select: none;
+            touch-action: pan-y;
+            pointer-events: auto;
+            will-change: transform;
+            backface-visibility: hidden;
+            transform: translateZ(0);
+            transform-style: preserve-3d;
+        }
+
+        .gallery-track:active {
+            cursor: grabbing;
+        }
+
+        .gallery-slide {
+            flex-shrink: 0;
+            width: clamp(420px, 42vw, 760px);
+            height: clamp(430px, 52vh, 660px);
+            will-change: transform;
+            backface-visibility: hidden;
+            transform: translateZ(0);
+            transform-origin: 50% 50%;
+            pointer-events: none;
+        }
+
+        .gallery-slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            pointer-events: none;
+            -webkit-user-drag: none;
+            user-select: none;
+            backface-visibility: hidden;
+        }
+
+        @media (max-width: 900px) {
+            .gallery-section {
+                min-height: auto;
+                padding: 80px 0 32px;
+            }
+            .gallery-header {
+                padding: 0 28px;
+                margin-bottom: 48px;
+            }
+            .gallery-header h2 {
+                font-size: clamp(36px, 10vw, 52px);
+                line-height: 1;
+            }
+            .gallery-header p {
+                font-size: 15px;
+                margin: 20px auto 24px;
+            }
+            .gallery-carousel {
+                padding: 0 0 22px;
+                overflow: hidden;
+            }
+            .gallery-track {
+                gap: 10px;
+            }
+            .gallery-slide {
+                width: 72vw;
+                height: 52vw;
+                min-height: 190px;
+            }
+            .gallery-slide.active {
+                width: 78vw;
+                height: 60vw;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .gallery-section {
+                padding: 60px 0 28px;
+            }
+            .gallery-header {
+                padding: 0 24px;
+                margin-bottom: 32px;
+            }
+            .gallery-track {
+                gap: 10px;
+            }
+            .gallery-slide {
+                width: 72vw;
+                height: 54vw;
+                min-height: 180px;
+            }
+            .gallery-slide.active {
+                width: 78vw;
+                height: 62vw;
+            }
+        }
+
+        /* ========================================
+           9. RESERVA
+        ======================================== */
+        .reserva {
+            position: relative;
+            background-color: #fbf8f3;
+            background-image:
+                linear-gradient(
+                    180deg,
+                    #fbf8f3 0%,
+                    rgba(251, 248, 243, 0.94) 7%,
+                    rgba(251, 248, 243, 0.58) 18%,
+                    rgba(251, 248, 243, 0.16) 34%,
+                    rgba(251, 248, 243, 0.16) 100%
+                ),
+                url('assets/onyx-reserva-marble-bg.webp');
+            background-size: cover;
+            background-position: center;
+            color: #241a16;
+            padding: clamp(86px, 7vw, 118px) clamp(46px, 7.5vw, 120px);
+            overflow: hidden;
+            z-index: 2;
+        }
+
+        .reserva-inner {
+            width: min(1320px, 100%);
+            margin: 0 auto;
+            padding: 0;
+            background: transparent;
+            border: 0;
+            box-shadow: none;
+        }
+
+        .reserva-eyebrow {
+            font-family: var(--font-sans);
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 0.28em;
+            text-transform: uppercase;
+            color: #aa8d68;
+            margin-bottom: 30px;
+        }
+
+        .reserva-heading {
+            max-width: 840px;
+            margin-bottom: 42px;
+        }
+
+        .reserva-heading h2 {
+            font-family: var(--font-serif);
+            font-size: clamp(72px, 7.2vw, 112px);
+            font-weight: 400;
+            line-height: 0.84;
+            color: #241a16;
+            margin: 0 0 42px;
+            max-width: 720px;
+        }
+
+        .reserva-heading h2 em {
+            font-style: italic;
+        }
+
+        .reserva-heading-line {
+            display: block;
+        }
+
+        .reserva-intro {
+            max-width: 650px;
+            font-family: var(--font-sans);
+            font-size: clamp(15px, 1.15vw, 18px);
+            line-height: 1.55;
+            color: #62574f;
+            margin: 0;
+        }
+
+        .reserva-layout {
+            display: grid;
+            grid-template-columns: minmax(330px, 0.78fr) minmax(620px, 1.22fr);
+            gap: clamp(64px, 7vw, 116px);
+            align-items: start;
+            padding-top: 34px;
+            border-top: 1px solid #d5c8b9;
+        }
+
+        .reserva-summary {
+            padding-top: 34px;
+        }
+
+        .reserva-retreat-name {
+            font-family: var(--font-serif);
+            font-size: clamp(34px, 3vw, 48px);
+            font-weight: 400;
+            line-height: 1;
+            color: #241a16;
+            margin-bottom: 38px;
+        }
+
+        .reserva-details {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: grid;
+            gap: 18px;
+        }
+
+        .reserva-details li {
+            display: flex;
+            align-items: center;
+            gap: 17px;
+            font-family: var(--font-sans);
+            font-size: 15px;
+            line-height: 1.4;
+            color: #62574f;
+        }
+
+        .reserva-detail-icon {
+            width: 22px;
+            height: 22px;
+            flex: 0 0 22px;
+            color: #aa8d68;
+            stroke-width: 1.45;
+        }
+
+        .reserva-payment {
+            padding: 30px 42px 28px;
+            background: rgba(248, 242, 234, 0.82);
+            border: 1px solid #d9ccbd;
+            box-shadow: 0 12px 34px rgba(81, 59, 43, 0.035);
+        }
+
+        .reserva-pricing {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            border-top: 1px solid #cfbeaa;
+            border-bottom: 1px solid #cfbeaa;
+            margin-bottom: 26px;
+        }
+
+        .reserva-price {
+            padding: 12px 22px 22px 0;
+            text-align: center;
+        }
+
+        .reserva-price + .reserva-price {
+            padding-left: 22px;
+            border-left: 1px solid #cfbeaa;
+        }
+
+        .reserva-price span {
+            display: block;
+            font-family: var(--font-sans);
+            font-size: 10px;
+            font-weight: 600;
+            letter-spacing: 0.17em;
+            text-transform: uppercase;
+            color: #9b805f;
+            margin-bottom: 16px;
+        }
+
+        .reserva-price strong {
+            display: block;
+            font-family: var(--font-serif);
+            font-size: clamp(32px, 2.7vw, 44px);
+            font-weight: 400;
+            line-height: 1;
+            color: #241a16;
+        }
+
+        .reserva-payment-copy {
+            max-width: 590px;
+            font-family: var(--font-sans);
+            font-size: 14px;
+            line-height: 1.65;
+            color: #62574f;
+            margin: 0 auto 27px;
+            text-align: left;
+        }
+
+        .reserva-cta {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            min-height: 68px;
+            padding: 0 30px;
+            font-family: var(--font-sans);
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 0.14em;
+            color: #fbf8f3;
+            background: #241a16;
+            text-transform: uppercase;
+            border: 1px solid #241a16;
+            transition: background 0.3s ease, color 0.3s ease;
+        }
+
+        .reserva-cta:hover {
+            background: #fbf8f3;
+            color: #241a16;
+        }
+
+        .reserva-secure {
+            font-family: var(--font-sans);
+            font-size: 11px;
+            letter-spacing: 0.08em;
+            color: #8b7d72;
+            margin-top: 16px;
+            text-align: center;
+        }
+
+        .reserva-closing {
+            font-family: var(--font-serif);
+            font-size: clamp(32px, 3vw, 48px);
+            font-style: italic;
+            line-height: 1.1;
+            max-width: 650px;
+            margin: 38px 0 0 auto;
+            text-align: right;
+            color: #3f3028;
+        }
+
+        @media (min-width: 901px) and (max-width: 1150px) {
+            .reserva {
+                padding-right: 46px;
+                padding-left: 46px;
+            }
+
+            .reserva-layout {
+                grid-template-columns: minmax(250px, 0.68fr) minmax(0, 1.32fr);
+                gap: 48px;
+            }
+
+            .reserva-payment {
+                padding-right: 28px;
+                padding-left: 28px;
+            }
+
+            .reserva-price,
+            .reserva-price + .reserva-price {
+                padding-right: 12px;
+                padding-left: 12px;
+            }
+        }
+
+        /* ========================================
+           10. FOOTER
+        ======================================== */
+        .footer {
+            position: relative;
+            z-index: 1;
+            padding: 90px 40px 38px;
+        }
+
+        .footer-top {
+            text-align: center;
+            margin-bottom: 54px;
+        }
+
+        .footer-logo {
+            font-family: var(--font-serif);
+            font-size: clamp(54px, 5vw, 72px);
+            font-weight: 400;
+            line-height: 1;
+            margin-bottom: 18px;
+        }
+
+        .footer-logo em {
+            font-style: italic;
+        }
+
+        .footer-tagline {
+            font-family: var(--font-sans);
+            font-size: clamp(9px, 0.8vw, 11px);
+            line-height: 1.7;
+            letter-spacing: 0.24em;
+            text-transform: uppercase;
+            color: var(--text-muted-light);
+            max-width: 760px;
+            margin: 0 auto;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 36px;
+            max-width: 760px;
+            margin: 0 auto;
+            padding-top: 26px;
+            border-top: 1px solid rgba(237, 233, 228, 0.08);
+        }
+
+        .footer-col {
+            text-align: center;
+        }
+
+        .footer-col-title {
+            font-family: var(--font-sans);
+            font-size: 10px;
+            font-weight: 600;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--text-muted-light);
+            margin-bottom: 10px;
+        }
+
+        .footer-col p,
+        .footer-col a {
+            font-family: var(--font-sans);
+            font-size: 12px;
+            line-height: 1.65;
+            color: var(--text-muted);
+            display: block;
+        }
+
+        .footer-col a:hover {
+            color: var(--text-light);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            margin-top: 50px;
+            padding-top: 16px;
+            border-top: 1px solid rgba(237, 233, 228, 0.05);
+        }
+
+        .footer-bottom p {
+            font-family: var(--font-sans);
+            font-size: 9px;
+            line-height: 1.6;
+            letter-spacing: 0.12em;
+            color: var(--text-muted);
+        }
+
+        /* ========================================
+           RESPONSIVE
+        ======================================== */
+        @media (max-width: 900px) {
+            .navbar {
+                padding: 20px 24px;
+            }
+
+            .hero-content {
+                padding: 0 24px 40px;
+            }
+
+            .container {
+                padding: 0 24px;
+            }
+
+            .dia {
+                grid-template-columns: 1fr;
+                gap: 24px;
+            }
+
+            .reserva {
+                padding: 68px 22px 76px;
+                background-position: 42% center;
+            }
+
+            .section-separator.reserva-transition {
+                height: 40px;
+            }
+
+            .reserva-inner {
+                padding: 0;
+            }
+
+            .reserva-heading {
+                margin-bottom: 42px;
+            }
+
+            .reserva-heading h2 {
+                font-size: clamp(52px, 14vw, 70px);
+                line-height: 0.88;
+                margin-bottom: 30px;
+            }
+
+            .reserva-layout {
+                grid-template-columns: 1fr;
+                gap: 44px;
+                padding-top: 30px;
+            }
+
+            .reserva-summary {
+                padding-top: 10px;
+            }
+
+            .reserva-retreat-name {
+                margin-bottom: 28px;
+            }
+
+            .reserva-payment {
+                padding: 26px 22px 24px;
+            }
+
+            .reserva-pricing {
+                grid-template-columns: 1fr;
+            }
+
+            .reserva-price,
+            .reserva-price + .reserva-price {
+                padding: 20px 0;
+                border-left: 0;
+            }
+
+            .reserva-price + .reserva-price {
+                border-top: 1px solid #cfbeaa;
+            }
+
+            .reserva-cta {
+                width: 100%;
+                min-height: 60px;
+                padding: 0 18px;
+                font-size: 11px;
+                text-align: center;
+            }
+
+            .reserva-closing {
+                margin-top: 48px;
+                font-size: clamp(30px, 8.5vw, 40px);
+                text-align: left;
+            }
+
+            .footer {
+                padding: 72px 24px 32px;
+            }
+
+            .footer-top {
+                margin-bottom: 44px;
+            }
+
+            .footer-logo {
+                font-size: clamp(44px, 13vw, 58px);
+                margin-bottom: 16px;
+            }
+
+            .footer-tagline {
+                max-width: 520px;
+                font-size: 9px;
+                letter-spacing: 0.18em;
+            }
+
+            .pilar-content {
+                flex-direction: column;
+                padding: 32px 24px 0;
+            }
+
+            .pilar-title {
+                min-width: 0;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+                gap: 24px;
+                padding-top: 24px;
+            }
+
+            .footer-col-title {
+                margin-bottom: 8px;
+            }
+
+            .footer-bottom {
+                margin-top: 40px;
+                padding-top: 14px;
+            }
+
+            .kinetic-section {
+                height: 40vh;
+                min-height: 230px;
+            }
+
+            .kinetic-word {
+                font-size: clamp(40px, 13vw, 58px);
+                white-space: nowrap;
+                line-height: 1;
+            }
+
+            .kinetic-row {
+                padding: 0;
+                flex-direction: column;
+                align-items: center;
+                gap: 0.08em;
+                width: 100%;
+            }
+
+            .kinetic-word.kinetic-left {
+                display: block;
+                padding-left: 0;
+                text-align: center;
+            }
+
+            .kinetic-word.kinetic-right {
+                display: block;
+                text-align: center;
+                padding-right: 0;
+                margin-top: 0;
+            }
+
+            .kinetic-center {
+                padding: 0 24px;
+                text-align: center;
+                margin-top: 14px;
+                font-size: clamp(10px, 2.8vw, 12px);
+            }
+
+            /* Servicios responsive */
+            .servicios-section {
+                min-height: auto;
+            }
+
+            .servicios-sticky {
+                position: relative;
+                height: auto;
+                min-height: auto;
+                padding: 88px 0 96px;
+                overflow: visible;
+            }
+
+            .servicios-inner,
+            .servicios-list-viewport {
+                width: auto;
+                margin: 0;
+                padding: 0 24px;
+            }
+
+            .servicios-heading {
+                margin-bottom: 72px;
+            }
+
+            .servicios-title-line:first-child {
+                font-size: clamp(62px, 11vw, 84px);
+            }
+
+            .servicios-title-line:last-child {
+                font-size: clamp(56px, 10vw, 76px);
+            }
+
+            .servicios-list-viewport {
+                overflow: visible;
+                padding-bottom: 0;
+            }
+
+            .servicio-item {
+                position: relative;
+                top: auto;
+                left: auto;
+                right: auto;
+            }
+
+            .servicio-reveal {
+                grid-template-columns: 52px minmax(0, 1fr) minmax(220px, 0.85fr);
+                gap: 22px 32px;
+                padding: 28px 0;
+            }
+
+            .servicio-desc {
+                max-width: none;
+            }
+
+            .servicio-image-wrap {
+                grid-column: 2 / 4;
+                height: 240px;
+            }
+
+            /* Everyday responsive */
+            .everyday-section {
+                min-height: auto;
+                border-top-width: 70px;
+                border-bottom-width: 80px;
+            }
+
+            .everyday-sticky {
+                position: relative;
+                top: auto;
+                height: auto;
+                min-height: auto;
+                padding: 104px 24px 96px;
+                justify-content: flex-start;
+                overflow: visible;
+            }
+
+            .everyday-heading {
+                margin-bottom: 45px;
+                text-align: left;
+                transform: none !important;
+                opacity: 1 !important;
+            }
+
+            .everyday-layout {
+                display: flex;
+                flex-direction: column;
+                gap: 0;
+                width: 100%;
+            }
+
+            .everyday-sticky-col {
+                display: none;
+            }
+
+            .everyday-list-panel {
+                width: 100%;
+                transform: none !important;
+            }
+
+            .everyday-footer {
+                width: 100%;
+                margin-top: 40px;
+                max-width: none;
+            }
+
+            .activity-item {
+                transform: none !important;
+                opacity: 1 !important;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .hero-title {
+                font-size: clamp(62px, 17vw, 108px);
+            }
+
+            .bienvenida h2 {
+                font-size: clamp(28px, 8vw, 42px);
+            }
+
+            .experiencia-card {
+                padding: 32px 24px;
+            }
+
+            .everyday-sticky {
+                padding: 88px 24px 80px;
+            }
+
+            .everyday-heading {
+                margin-bottom: 45px;
+            }
+
+            .everyday-heading h2 {
+                font-size: clamp(36px, 10vw, 44px);
+                line-height: 1;
+                text-align: left;
+            }
+
+            .activity-item h3 {
+                font-size: clamp(26px, 7vw, 34px);
+                line-height: 1;
+                color: #c7c7c7;
+            }
+
+            .activity-item.active h3 {
+                color: #111111;
+            }
+
+            .activity-item {
+                padding: 19px 0;
+                border-top: 1px solid #cfc8bd;
+            }
+
+            .activity-item:last-child {
+                border-bottom: 1px solid #cfc8bd;
+            }
+
+            .everyday-list-col {
+                padding-top: 0;
+            }
+
+            .everyday-footer p {
+                font-size: 13px;
+                line-height: 1.35;
+            }
+
+            .everyday-footer a {
+                font-size: 11px;
+                letter-spacing: 0.08em;
+            }
+
+            .everyday-footer {
+                gap: 18px;
+                margin-top: 36px;
+            }
+
+            .servicios-sticky {
+                padding: 76px 0 84px;
+            }
+
+            .servicios-inner,
+            .servicios-list-viewport {
+                padding: 0 20px;
+            }
+
+            .servicios-heading {
+                margin-bottom: 64px;
+            }
+
+            .servicios-title {
+                line-height: 0.88;
+            }
+
+            .servicios-title-line:first-child {
+                font-size: clamp(52px, 15vw, 62px);
+            }
+
+            .servicios-title-line:last-child {
+                font-size: clamp(48px, 14vw, 58px);
+            }
+
+            .servicio-item {
+                display: block;
+            }
+
+            .servicio-reveal {
+                display: block;
+                padding: 22px 0;
+            }
+
+            .servicio-num {
+                display: block;
+                font-size: 14px;
+                margin-bottom: 12px;
+                padding-top: 0;
+            }
+
+            .servicio-title {
+                font-size: clamp(36px, 11vw, 46px);
+                line-height: 1;
+                margin-bottom: 16px;
+            }
+
+            .servicio-desc {
+                font-size: 16px;
+                line-height: 1.3;
+                margin-bottom: 20px;
+            }
+
+            .servicio-image-wrap {
+                height: auto;
+                aspect-ratio: 1.75;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .everyday-section {
+                border-top-width: 0;
+                border-bottom-width: 0;
+            }
+
+            .everyday-sticky {
+                padding: 70px 24px;
+            }
+
+            .everyday-heading {
+                margin-bottom: 58px;
+            }
+
+            .activity-item h3 {
+                color: rgba(0, 0, 0, 0.12);
+                opacity: 0.82;
+                transition: color 0.35s ease, opacity 0.35s ease;
+            }
+
+            .activity-item h3.is-active-mobile {
+                color: #111111;
+                opacity: 1;
+            }
+        }
+
+        /* ========================================
+           SMOOTH SCROLL INDICATOR
+        ======================================== */
+        .scroll-indicator {
+            position: absolute;
+            bottom: 24px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 3;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            opacity: 0;
+        }
+
+        .scroll-indicator span {
+            font-family: var(--font-sans);
+            font-size: 9px;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            color: var(--text-muted-light);
+        }
+
+        .scroll-line {
+            width: 1px;
+            height: 32px;
+            background: linear-gradient(to bottom, var(--text-muted-light), transparent);
+            animation: scrollPulse 2s ease-in-out infinite;
+        }
+
+        @keyframes scrollPulse {
+            0%, 100% { opacity: 0.3; transform: scaleY(0.6); }
+            50% { opacity: 1; transform: scaleY(1); }
+        }
+
+        /* ========================================
+           PAGE LOADER
+        ======================================== */
+        .page-loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--bg-dark);
+            z-index: 10000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .page-loader-text {
+            font-family: var(--font-serif);
+            font-size: clamp(24px, 4vw, 40px);
+            color: var(--text-light);
+            opacity: 0;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- PAGE LOADER -->
+    <div class="page-loader" id="pageLoader">
+        <div class="page-loader-text" id="loaderText">ÓNIX <em>Woman</em></div>
+    </div>
+
+    <!-- NAVBAR -->
+    <nav class="navbar" id="navbar">
+        <a href="#" class="navbar-logo">ÓNIX WOMAN</a>
+        <div class="navbar-hamburger" id="hamburger" aria-label="Menú de navegación">
+            <span></span>
+            <span></span>
+        </div>
+    </nav>
+
+    <!-- MOBILE MENU -->
+    <div class="mobile-menu" id="mobileMenu">
+        <div class="mobile-menu-links">
+            <a href="#bienvenida" class="menu-link">El Retiro</a>
+            <a href="#servicios" class="menu-link">Qué incluye</a>
+            <a href="#programa" class="menu-link">El Programa</a>
+            <a href="#cada-dia" class="menu-link">La Experiencia</a>
+            <a href="#galeria" class="menu-link">Mérida · Yucatán</a>
+            <a href="#reserva" class="menu-link">Reservar plaza</a>
+        </div>
+        <div class="mobile-menu-meta">
+            <p>Mérida · Yucatán</p>
+            <p>20 al 23 de agosto · Solo 8 mujeres</p>
+        </div>
+    </div>
+
+    <!-- ============================
+         1. HERO
+    ============================ -->
+    <section class="hero section" id="hero">
+        <div class="hero-image-wrapper" id="heroImageWrapper">
+            <picture>
+                <source media="(max-width: 900px)" srcset="assets/images/hero/hero-movil.webp">
+                <img src="assets/images/hero/hero-escritorio.webp" alt="Mujer contemplando el paisaje desde una hacienda privada" loading="eager">
+            </picture>
+        </div>
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <p class="hero-tagline" id="heroTagline">MÉRIDA · YUCATÁN · EDICIÓN PRIVADA</p>
+            <h1 class="hero-title" id="heroTitle">ÓNIX <em>Woman</em></h1>
+            <p class="hero-subtitle" id="heroSubtitle">20 AL 23 DE AGOSTO · 4 DÍAS / 3 NOCHES · SOLO 8 MUJERES · INVERSIÓN 9.800 €</p>
+        </div>
+        <div class="scroll-indicator" id="scrollIndicator">
+            <span>SOLICITAR PLAZA PRIVADA</span>
+            <div class="scroll-line"></div>
+        </div>
+    </section>
+
+    <!-- SEPARATOR -->
+    <hr class="section-separator">
+
+    <!-- ============================
+         2. BIENVENIDA
+    ============================ -->
+    <section class="section section-beige bienvenida" id="bienvenida">
+        <div class="container">
+            <div class="bienvenida-inner">
+                <h2 class="reveal">Has aprendido a sostenerlo todo. <em>Pero… ¿quién te sostiene a ti?</em></h2>
+                <p class="reveal">Hay mujeres que lideran, cuidan, resuelven y sostienen demasiado. Mujeres admiradas por fuera, pero pocas veces escuchadas por dentro. Ónix Woman nace para esa mujer. La que ha conseguido mucho. La que puede con todo. Y la que necesita volver a sí misma.</p>
+                <a href="#metodo" class="text-link reveal">DESCUBRE ÓNIX WOMAN</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- SEPARATOR -->
+    <hr class="section-separator">
+
+    <!-- ============================
+         3. EL MÃ‰TODO â€” EDITORIAL SPACES
+    ============================ -->
+    <section class="retreat-editorial section" id="metodo">
+        <div class="retreat-editorial-bg" aria-hidden="true">
+            <div class="retreat-watermark">
+                <svg viewBox="0 0 1200 1200" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M54 366C164 226 330 259 352 408C377 574 105 555 166 742C226 926 498 782 421 625C350 481 144 595 224 772C332 1010 717 938 686 626C658 342 383 341 470 573C563 822 964 705 925 479C895 304 674 337 708 527C748 748 1060 733 1138 514" stroke="currentColor" stroke-width="5" stroke-linecap="round"/>
+                    <path d="M160 964C308 826 492 850 548 1012C603 1171 853 1126 836 924C819 726 1061 690 1154 812" stroke="currentColor" stroke-width="5" stroke-linecap="round"/>
+                </svg>
+            </div>
+        </div>
+
+        <div class="retreat-editorial-inner">
+            <div class="retreat-intro">
+                <h2>El retiro para mujeres</h2>
+                <h2><em>que lo sostienen todo</em></h2>
+            </div>
+
+            <article class="retreat-block">
+                <div class="retreat-copy">
+                    <h3>Ónix Woman</h3>
+                    <p>Una experiencia privada para mujeres de alto nivel que desean volver a encontrarse consigo mismas. No es un retiro wellness tradicional. No es un encuentro social. Es una inmersión íntima para recordar quién eres más allá de todo lo que sostienes.</p>
+                    <a href="#reserva">DESCUBRE ÓNIX WOMAN</a>
+                </div>
+                <div class="retreat-images">
+                    <div class="retreat-image-main">
+                        <img src="assets/images/metodo/mujer-detras-principal.webp" data-image-base="assets/images/metodo/mujer-detras-principal" data-image-fallback="https://images.unsplash.com/photo-1582719508461-905c673771fd?w=1500&q=82&auto=format&fit=crop" alt="Villa privada de lujo RH Elite" loading="lazy">
+                    </div>
+                    <div class="retreat-image-secondary">
+                        <img src="assets/images/metodo/mujer-detras-secundaria.webp" data-image-base="assets/images/metodo/mujer-detras-secundaria" data-image-fallback="https://images.unsplash.com/photo-1544787219-7f47ccb76574?w=900&q=82&auto=format&fit=crop" alt="Interior cálido del santuario RH Elite" loading="lazy">
+                    </div>
+                </div>
+            </article>
+
+            <article class="retreat-block">
+                <div class="retreat-copy">
+                    <h3>El cuerpo no miente</h3>
+                    <p>A veces el cuerpo habla antes que la mente. Cansancio. Tensión. Inflamación. Insomnio. Desconexión. Ónix Woman te invita a escuchar esas señales desde un espacio cuidado, femenino y profundo. No para exigirte más. Para volver a atenderte.</p>
+                    <a href="#reserva">EXPLORA LA EXPERIENCIA</a>
+                </div>
+                <div class="retreat-images">
+                    <div class="retreat-image-main">
+                        <img src="assets/images/metodo/cuerpo-principal.webp" data-image-base="assets/images/metodo/cuerpo-principal" data-image-fallback="https://images.unsplash.com/photo-1545205597-3d9d02c29597?w=1500&q=82&auto=format&fit=crop" alt="Arquitectura wellness para el descanso" loading="lazy">
+                    </div>
+                    <div class="retreat-image-secondary">
+                        <img src="assets/images/metodo/cuerpo-secundaria.webp" data-image-base="assets/images/metodo/cuerpo-secundaria" data-image-fallback="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=900&q=82&auto=format&fit=crop" alt="Habitación de descanso premium" loading="lazy">
+                    </div>
+                </div>
+            </article>
+
+            <article class="retreat-block">
+                <div class="retreat-copy">
+                    <h3>Una vida que también te sostenga</h3>
+                    <p>Has sostenido proyectos, familia, decisiones, equipos y expectativas. Has aprendido a resolver. A cuidar. A poder. Pero una vida construida desde la fuerza también necesita descanso, belleza y verdad. Ónix Woman no viene a cambiar quién eres. Viene a devolverte a ti.</p>
+                    <a href="#reserva">CONOCE EL PROGRAMA</a>
+                </div>
+                <div class="retreat-images">
+                    <div class="retreat-image-main">
+                        <img src="assets/images/metodo/vida-principal.webp" data-image-base="assets/images/metodo/vida-principal" data-image-fallback="https://images.unsplash.com/photo-1517842645767-c639042777db?w=1500&q=82&auto=format&fit=crop" alt="Naturaleza privada en México" loading="lazy">
+                    </div>
+                    <div class="retreat-image-secondary">
+                        <img src="assets/images/metodo/vida-secundaria.webp" data-image-base="assets/images/metodo/vida-secundaria" data-image-fallback="https://images.unsplash.com/photo-1516483638261-f4dbaf036963?w=900&q=82&auto=format&fit=crop" alt="Paisaje natural y silencio" loading="lazy">
+                    </div>
+                </div>
+            </article>
+        </div>
+    </section>
+
+    <!-- SEPARATOR -->
+    <hr class="section-separator">
+
+    <section class="servicios-section section" id="servicios">
+        <div class="servicios-sticky">
+            <div class="servicios-inner">
+                <div class="servicios-heading">
+                    <h2 class="servicios-title" aria-label="Personalized Services">
+                        <span class="servicios-title-line">Qué</span>
+                        <span class="servicios-title-line">Incluye</span>
+                    </h2>
+                </div>
+            </div>
+
+            <div class="servicios-list-viewport">
+                <div class="servicios-list" data-personalized-services></div>
+            </div>
+        </div>
+    </section>
+    <!-- ============================
+         4. TEXTO CINÃ‰TICO 1
+    ============================ -->
+    <section class="kinetic-section section" id="kinetic1">
+        <div class="kinetic-bg" data-parallax-bg>
+            <img src="assets/images/kinetic/soltar-para-volver.webp" data-image-base="assets/images/kinetic/soltar-para-volver" data-image-fallback="https://images.unsplash.com/photo-1552252059-8b1cd9019f5e?w=1920&q=80&auto=format" alt="Paisaje montaÃ±oso de MÃ©xico">
+        </div>
+        <div class="kinetic-overlay"></div>
+        <div class="kinetic-content">
+            <div class="kinetic-row">
+                <span class="kinetic-word kinetic-left" data-kinetic="left"><em>Soltar</em></span>
+                <span class="kinetic-word kinetic-right" data-kinetic="right">para <em>volver</em></span>
+            </div>
+            <p class="kinetic-center">NO TODO LO QUE PESA SE VE · NO TODO LO QUE SOSTIENES SE NOMBRA · Y NO TODO LO QUE HAS CONSEGUIDO PUEDE SEGUIR SOSTENIÉNDOSE DESDE LA MISMA VERSIÓN DE TI</p>
+        </div>
+    </section>
+
+    <!-- ============================
+         5. EL PROGRAMA
+    ============================ -->
+    <section class="section section-beige programa" id="programa">
+        <div class="container">
+            <div class="programa-header reveal">
+                <h2>El Programa<em>Cuatro días para dejar de funcionar en automático y volver a ocupar tu lugar.<br>De la exigencia a la escucha.<br>De la carga a la conciencia.<br>De la intención a la decisión.</em></h2>
+            </div>
+
+            <!-- DÃA 01 -->
+            <div class="dia">
+                <div class="dia-left">
+                    <span class="dia-number">01</span>
+                    <h3 class="dia-title">Día 1 · <em>Volver a escucharse</em></h3>
+                    <span class="dia-subtitle">SOLTAR LA IDENTIDAD Y ESCUCHARTE SIN MÁSCARAS</span>
+                </div>
+                <div class="dia-right">
+                    <ul>
+                        <li>Llegas, paras y dejas fuera el ruido, los cargos y la imagen que el mundo conoce de ti.</li>
+                        <li>Empiezas a mirar a la mujer que existe detrás de todo lo que sostienes.</li>
+                        <li>Intención: escucharte sin máscaras.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- DÃA 02 -->
+            <div class="dia">
+                <div class="dia-left">
+                    <span class="dia-number">02</span>
+                    <h3 class="dia-title">Día 2 · <em>La mujer que lo sostiene todo</em></h3>
+                    <span class="dia-subtitle">CARGA INVISIBLE, CUERPO Y CONCIENCIA</span>
+                </div>
+                <div class="dia-right">
+                    <ul>
+                        <li>Miramos la carga invisible: autoexigencia, cansancio, responsabilidad emocional y emociones contenidas.</li>
+                        <li>Un día para comprender cuánto peso llevas sin darte cuenta.</li>
+                        <li>Intención: devolver espacio a la mujer que eres.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- DÃA 03 -->
+            <div class="dia">
+                <div class="dia-left">
+                    <span class="dia-number">03</span>
+                    <h3 class="dia-title">Día 3 · <em>Ritual de minerales, flores y agua</em></h3>
+                    <span class="dia-subtitle">CIERRE, LIBERACIÓN Y NUEVA DIRECCIÓN</span>
+                </div>
+                <div class="dia-right">
+                    <ul>
+                        <li>El corazón de Ónix Woman.</li>
+                        <li>Cada mujer define qué desea dejar atrás y qué versión de sí misma desea recuperar.</li>
+                        <li>Mineral: fortaleza. Flor: renacimiento. Agua: liberación.</li>
+                        <li>Intención: cerrar una etapa y anclar una nueva dirección.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- DÃA 04 -->
+            <div class="dia">
+                <div class="dia-left">
+                    <span class="dia-number">04</span>
+                    <h3 class="dia-title">Día 4 · <em>La nueva mujer</em></h3>
+                    <span class="dia-subtitle">CLARIDAD, PRESENCIA Y UNA NUEVA FORMA DE SOSTENERTE</span>
+                </div>
+                <div class="dia-right">
+                    <ul>
+                        <li>La experiencia se convierte en estructura.</li>
+                        <li>Definirás tu plan personal de 30 días y tus nuevas reglas de vida.</li>
+                        <li>No se trata de salir inspirada. Se trata de salir con dirección.</li>
+                        <li>Intención: volver a tu vida sin perderte a ti.</li>
+                        <li>Cada día tiene una intención. Cada experiencia tiene un símbolo. Cada mujer vuelve con una decisión.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================
+         6. CHEF RHÂ·ORIGEN
+    ============================ -->
+    <section class="chef section" id="chef">
+        <div class="chef-bg" data-parallax-bg>
+            <img src="assets/images/metodo-rebeca/volver-a-ti.webp" data-image-base="assets/images/metodo-rebeca/volver-a-ti" data-image-fallback="https://images.unsplash.com/photo-1543269865-cbf427effbad?w=1920&q=80&auto=format" alt="Mesa elegante con gastronomÃ­a de alta cocina">
+        </div>
+        <div class="chef-overlay"></div>
+        <div class="chef-content reveal">
+            <p class="chef-label">REBECA HIDALGO · ARQUITECTURA FUNCIONAL RH®</p>
+            <h2><em>Volver a ti</em> también<br>requiere método</h2>
+            <p>Cuerpo. Emoción. Ritual. Integración.<br>Una experiencia creada para sostenerte de otra manera.</p>
+        </div>
+    </section>
+    <!-- ============================
+         NEW SECTION 2: EVERY DAY DESIGNED FOR YOU
+    ============================ -->
+    <section class="everyday-section section" id="cada-dia">
+        <div class="everyday-sticky">
+            <div class="everyday-heading">
+                <h2>Qué puedes vivir</h2>
+                <h2 class="italic-line">en 4 días</h2>
+            </div>
+
+            <div class="everyday-layout">
+                <div class="everyday-sticky-col">
+                    <div class="everyday-sticky-img-wrapper" data-everyday-images></div>
+                </div>
+
+                <div class="everyday-list-panel">
+                    <div class="everyday-list-col" data-everyday-activities></div>
+
+                    <div class="everyday-footer">
+                        <p>Cada día tiene una intención. Cada experiencia tiene un símbolo. Cada mujer vuelve con una decisión.</p>
+                        <a href="#reserva">EXPLORAR EL PROGRAMA</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================
+         7. TEXTO CINÃ‰TICO 2
+    ============================ -->
+    <section class="kinetic-section section" id="kinetic2">
+        <div class="kinetic-bg" data-parallax-bg>
+            <img src="assets/images/kinetic/riqueza-seguir-siendo-tu.webp" data-image-base="assets/images/kinetic/riqueza-seguir-siendo-tu" data-image-fallback="https://images.unsplash.com/photo-1504701954957-2010ec3bcec1?w=1920&q=80&auto=format" alt="Naturaleza exuberante de MÃ©xico, selva">
+        </div>
+        <div class="kinetic-overlay"></div>
+        <div class="kinetic-content">
+            <div class="kinetic-row">
+                <span class="kinetic-word kinetic-left" data-kinetic="left"><em>Riqueza</em></span>
+                <span class="kinetic-word kinetic-right" data-kinetic="right">es seguir siendo <em>tú</em></span>
+            </div>
+            <p class="kinetic-center">LA VERDADERA RIQUEZA DE UNA MUJER NO ES TODO LO QUE HA CONSEGUIDO · ES LA CAPACIDAD DE SEGUIR SIENDO ELLA MISMA MIENTRAS LO CONSIGUE</p>
+        </div>
+    </section>
+
+    <!-- SEPARATOR -->
+    <hr class="section-separator">
+
+    <!-- ============================
+         8.5 GALERÃA â€” Carrusel
+    ============================ -->
+    <section class="gallery-section section" id="galeria">
+        <div class="gallery-header reveal">
+            <h2>Una hacienda privada.</h2>
+            <h2 class="italic-line">Tu mundo, en pausa.</h2>
+            <p>Mérida · Yucatán.<br>Un entorno íntimo, discreto y profundamente femenino para bajar el ritmo, respirar distinto y volver a ti.</p>
+            <a href="#galeria">DESCUBRE MÉRIDA · YUCATÁN</a>
+        </div>
+        <div class="gallery-carousel" id="galleryCarousel">
+            <div class="gallery-track" id="galleryTrack">
+            </div>
+        </div>
+    </section>
+
+    <!-- TRANSICIÓN HACIA RESERVA -->
+    <hr class="section-separator reserva-transition">
+
+    <!-- ============================
+         9. RESERVA
+    ============================ -->
+    <section class="reserva" id="reserva">
+        <div class="reserva-inner">
+            <div class="reserva-heading reveal">
+                <p class="reserva-eyebrow">Acceso Privado</p>
+                <h2>
+                    <span class="reserva-heading-line">Tu lugar en <em>Ónix</em></span>
+                    <span class="reserva-heading-line"><em>Woman</em></span>
+                </h2>
+                <p class="reserva-intro">Una experiencia privada para mujeres que lo sostienen todo y desean volver a sí mismas desde la calma, la belleza y una nueva dirección interior.</p>
+            </div>
+
+            <div class="reserva-layout">
+                <div class="reserva-summary reveal">
+                    <h3 class="reserva-retreat-name">Retiro Ónix Woman</h3>
+                    <ul class="reserva-details">
+                        <li>
+                            <svg class="reserva-detail-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="2.5"/></svg>
+                            <span>Mérida · Yucatán</span>
+                        </li>
+                        <li>
+                            <svg class="reserva-detail-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 2v4M16 2v4M3 9h18"/><rect x="3" y="4" width="18" height="18" rx="2"/></svg>
+                            <span>20 al 23 de agosto</span>
+                        </li>
+                        <li>
+                            <svg class="reserva-detail-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.42 1.42M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.42-1.42M17.66 6.34l1.41-1.41"/></svg>
+                            <span>4 días / 3 noches</span>
+                        </li>
+                        <li>
+                            <svg class="reserva-detail-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                            <span>Solo 8 mujeres</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="reserva-payment reveal">
+                    <div class="reserva-pricing" aria-label="Desglose de la inversión">
+                        <div class="reserva-price">
+                            <span>Inversión total</span>
+                            <strong>9.800 €</strong>
+                        </div>
+                        <div class="reserva-price">
+                            <span>Reserva inicial</span>
+                            <strong>4.900 €</strong>
+                        </div>
+                        <div class="reserva-price">
+                            <span>Pago restante</span>
+                            <strong>4.900 €</strong>
+                        </div>
+                    </div>
+
+                    <p class="reserva-payment-copy">La reserva inicial confirma tu plaza. El segundo pago se completará posteriormente mediante enlace privado.</p>
+                    <a class="reserva-cta" href="#" data-stripe-payment-link aria-label="Solicitar plaza privada mediante Stripe">Solicitar plaza privada</a>
+                    <p class="reserva-secure">Plazas limitadas por privacidad, acompañamiento individual y calidad de experiencia.</p>
+                </div>
+            </div>
+
+            <p class="reserva-closing reveal">Porque la mujer más importante de tu vida también eres tú.</p>
+        </div>
+    </section>
+
+    <!-- ============================
+         10. FOOTER
+    ============================ -->
+    <footer class="section section-dark footer" id="footer">
+        <div class="footer-top reveal">
+            <div class="footer-logo">ÓNIX <em>Woman</em></div>
+            <p class="footer-tagline">UNA EXPERIENCIA PRIVADA CREADA POR REBECA HIDALGO DENTRO DEL UNIVERSO ARQUITECTURA FUNCIONAL RH®</p>
+        </div>
+
+        <div class="footer-grid reveal">
+            <div class="footer-col">
+                <h4 class="footer-col-title">CONTACTO</h4>
+                <a href="mailto:rebecavidasana@gmailo.com">rebecavidasana@gmailo.com</a>
+                <p>Mérida · Yucatán</p>
+            </div>
+            <div class="footer-col">
+                <h4 class="footer-col-title">RETIRO</h4>
+                <p>20 al 23 de agosto</p>
+                <p>4 días / 3 noches</p>
+                <p>Solo 8 mujeres</p>
+            </div>
+            <div class="footer-col">
+                <h4 class="footer-col-title">RESERVA PRIVADA</h4>
+                <a href="#reserva">Solicitar plaza</a>
+                <p>Inversión 9.800 €</p>
+                <p>Edición privada</p>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>Porque la mujer más importante de tu vida también eres tú. · © 2025 Arquitectura Funcional RH®</p>
+        </div>
+    </footer>
+
+    <!-- ============================
+         JAVASCRIPT
+    ============================ -->
+    <script>
+        // Wait for DOM + fonts
+        document.addEventListener('DOMContentLoaded', () => {
+
+            gsap.registerPlugin(ScrollTrigger);
+
+            // ========================================
+            // PAGE LOADER
+            // ========================================
+            const loader = document.getElementById('pageLoader');
+            const loaderText = document.getElementById('loaderText');
+
+            const loaderTL = gsap.timeline({
+                onComplete: () => {
+                    loader.style.display = 'none';
+                    initAnimations();
+                }
+            });
+
+            loaderTL
+                .to(loaderText, {
+                    opacity: 1,
+                    duration: 0.8,
+                    ease: 'power2.out'
+                })
+                .to(loaderText, {
+                    opacity: 0,
+                    duration: 0.5,
+                    delay: 0.6,
+                    ease: 'power2.in'
+                })
+                .to(loader, {
+                    yPercent: -100,
+                    duration: 1,
+                    ease: 'power3.inOut'
+                });
+
+
+            function initAnimations() {
+                const personalizedServices = [
+                    {
+                        number: '01',
+                        title: 'Método Ónix Woman',
+                        description: 'Un proceso íntimo para comprender tus patrones, recuperar presencia y rediseñar la forma en que sostienes tu vida.',
+                        imageBase: 'assets/images/servicios/metodo-onix',
+                        image: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=960&q=80&auto=format&fit=crop'
+                    },
+                    {
+                        number: '02',
+                        title: 'Ritual de Origen',
+                        description: 'Minerales, flores y agua como acto privado de cierre, presencia y elección consciente.',
+                        imageBase: 'assets/images/servicios/ritual-origen',
+                        image: 'https://images.unsplash.com/photo-1519738901709-1dbe3fc41e58?w=960&q=80&auto=format&fit=crop'
+                    },
+                    {
+                        number: '03',
+                        title: 'Diagnóstico Cuántico RH',
+                        description: 'Una lectura individual para identificar desequilibrios, necesidades y prioridades específicas de tu cuerpo.',
+                        imageBase: 'assets/images/servicios/diagnostico-cuantico',
+                        image: 'https://images.unsplash.com/photo-1511174511562-5f97f4f4e3f6?w=960&q=80&auto=format&fit=crop'
+                    },
+                    {
+                        number: '04',
+                        title: 'Gastronomía Funcional',
+                        description: 'Menús diseñados para nutrir, restaurar y ofrecer placer sin exigir nada más a tu cuerpo.',
+                        imageBase: 'assets/images/servicios/gastronomia-funcional',
+                        image: 'https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=960&q=80&auto=format&fit=crop'
+                    },
+                    {
+                        number: '05',
+                        title: 'Plan de 30 Días',
+                        description: 'Una hoja de ruta personal para trasladar lo vivido a tus decisiones, hábitos y relaciones cotidianas.',
+                        imageBase: 'assets/images/servicios/plan-30-dias',
+                        image: 'https://images.unsplash.com/photo-1471107340929-a87cd0f5b5f3?w=960&q=80&auto=format&fit=crop'
+                    },
+                    {
+                        number: '06',
+                        title: 'Integración Privada',
+                        description: 'Acompañamiento posterior para sostener tus cambios con claridad, estructura y atención individual.',
+                        imageBase: 'assets/images/servicios/integracion-privada',
+                        image: 'https://images.unsplash.com/photo-1499209974431-9dddcece7f88?w=960&q=80&auto=format&fit=crop'
+                    }
+                ];
+
+                const servicesList = document.querySelector('[data-personalized-services]');
+                if (servicesList) {
+                    servicesList.innerHTML = personalizedServices.map(service => `
+                        <article class="servicio-item">
+                            <div class="servicio-reveal">
+                                <span class="servicio-num">${service.number}</span>
+                                <h3 class="servicio-title">${service.title}</h3>
+                                <p class="servicio-desc">${service.description}</p>
+                                <div class="servicio-image-wrap">
+                                    <img class="servicio-img" src="${service.imageBase}.webp" data-image-base="${service.imageBase}" data-image-fallback="${service.image}" alt="${service.title}" loading="lazy">
+                                </div>
+                            </div>
+                        </article>
+                    `).join('');
+                }
+
+                const everydayExperiences = [
+                    {
+                        title: 'Escucha corporal',
+                        imageBase: 'assets/images/cuatro-dias/escucha-corporal',
+                        image: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1100&q=80&auto=format&fit=crop'
+                    },
+                    {
+                        title: 'Claridad emocional',
+                        imageBase: 'assets/images/cuatro-dias/claridad-emocional',
+                        image: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=1100&q=80&auto=format&fit=crop'
+                    },
+                    {
+                        title: 'Descanso profundo',
+                        imageBase: 'assets/images/cuatro-dias/descanso-profundo',
+                        image: 'https://images.unsplash.com/photo-1516483638261-f4dbaf036963?w=1100&q=80&auto=format&fit=crop'
+                    },
+                    {
+                        title: 'Reconexión femenina',
+                        imageBase: 'assets/images/cuatro-dias/reconexion-femenina',
+                        image: 'https://images.unsplash.com/photo-1552252059-8b1cd9019f5e?w=1100&q=80&auto=format&fit=crop'
+                    },
+                    {
+                        title: 'Ritual Ónix Woman',
+                        imageBase: 'assets/images/cuatro-dias/ritual-onix-woman',
+                        image: 'https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1100&q=80&auto=format&fit=crop'
+                    },
+                    {
+                        title: 'Plan de 30 días',
+                        imageBase: 'assets/images/cuatro-dias/plan-30-dias',
+                        image: 'https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=1100&q=80&auto=format&fit=crop'
+                    },
+                    {
+                        title: 'Cada mujer vuelve con una decisión',
+                        imageBase: 'assets/images/cuatro-dias/decision-final',
+                        image: 'https://images.unsplash.com/photo-1517842645767-c639042777db?w=1100&q=80&auto=format&fit=crop'
+                    }
+                ];
+
+                const everydayImages = document.querySelector('[data-everyday-images]');
+                const everydayActivities = document.querySelector('[data-everyday-activities]');
+
+                if (everydayImages && everydayActivities) {
+                    everydayImages.innerHTML = everydayExperiences.map((item, index) => `
+                        <img class="${index === 0 ? 'active' : ''}" src="${item.imageBase}.webp" data-image-base="${item.imageBase}" data-image-fallback="${item.image}" alt="${item.title}" loading="${index === 0 ? 'eager' : 'lazy'}">
+                    `).join('');
+
+                    everydayActivities.innerHTML = everydayExperiences.map((item, index) => `
+                        <div class="activity-item ${index === 0 ? 'active' : ''}" data-activity-index="${index}">
+                            <h3>${item.title}</h3>
+                        </div>
+                    `).join('');
+                }
+
+                // ========================================
+                // HERO INTRO
+                // ========================================
+                const heroTL = gsap.timeline({ delay: 0.2 });
+
+                heroTL
+                    .to('#heroTagline', {
+                        opacity: 1,
+                        duration: 1.2,
+                        ease: 'power2.out'
+                    })
+                    .to('#heroTitle', {
+                        opacity: 1,
+                        duration: 1.4,
+                        ease: 'power2.out'
+                    }, '-=0.8')
+                    .to('#heroSubtitle', {
+                        opacity: 1,
+                        duration: 1,
+                        ease: 'power2.out'
+                    }, '-=0.6')
+                    .to('#scrollIndicator', {
+                        opacity: 1,
+                        duration: 1,
+                        ease: 'power2.out'
+                    }, '-=0.4');
+
+                // ========================================
+                // HERO PARALLAX
+                // ========================================
+                gsap.set('#heroImageWrapper img', { yPercent: 0 });
+
+                // ========================================
+                // REVEAL â€” Fade-in + Blur (global)
+                // ========================================
+                const revealEls = document.querySelectorAll('.reveal');
+                revealEls.forEach(el => {
+                    gsap.to(el, {
+                        opacity: 1,
+                        filter: 'blur(0px)',
+                        y: 0,
+                        duration: 1,
+                        ease: 'power2.out',
+                        scrollTrigger: {
+                            trigger: el,
+                            start: 'top 85%',
+                            toggleActions: 'play none none none'
+                        }
+                    });
+                });
+
+                // ========================================
+                // METODO — Hotel card reveals
+                // ========================================
+                document.querySelectorAll('.metodo-img').forEach(img => {
+                    gsap.to(img, {
+                        scale: 1,
+                        ease: 'none',
+                        scrollTrigger: {
+                            trigger: img.closest('.metodo-bloque'),
+                            start: 'top bottom',
+                            end: 'bottom top',
+                            scrub: 1.5
+                        }
+                    });
+                });
+
+                document.querySelectorAll('.metodo-bloque').forEach((bloque) => {
+                    gsap.from(bloque, {
+                        opacity: 0,
+                        y: 60,
+                        duration: 1.2,
+                        ease: 'power3.out',
+                        scrollTrigger: {
+                            trigger: bloque,
+                            start: 'top 80%',
+                            toggleActions: 'play none none none'
+                        }
+                    });
+                });
+
+                document.querySelectorAll('.metodo-bloque').forEach(bloque => {
+                    const textos = bloque.querySelectorAll('p, h3');
+                    gsap.from(textos, {
+                        opacity: 0,
+                        y: 25,
+                        duration: 0.9,
+                        stagger: 0.12,
+                        ease: 'power2.out',
+                        scrollTrigger: {
+                            trigger: bloque,
+                            start: 'top 65%'
+                        }
+                    });
+                });
+
+                // ========================================
+                // PILAR â€” Clip-path Reveal
+                // ========================================
+                const pilarClips = document.querySelectorAll('.pilar-image-clip');
+                pilarClips.forEach(el => {
+                    gsap.to(el, {
+                        clipPath: 'inset(0% 0 0 0)',
+                        duration: 1.4,
+                        ease: 'power3.inOut',
+                        scrollTrigger: {
+                            trigger: el,
+                            start: 'top 80%',
+                            toggleActions: 'play none none none'
+                        }
+                    });
+                });
+
+                // ========================================
+                // PARALLAX â€” All fullscreen images
+                // ========================================
+                const parallaxBgs = document.querySelectorAll('[data-parallax-bg] img');
+                parallaxBgs.forEach(img => {
+                    gsap.to(img, {
+                        yPercent: -12,
+                        ease: 'none',
+                        scrollTrigger: {
+                            trigger: img.closest('section'),
+                            start: 'top bottom',
+                            end: 'bottom top',
+                            scrub: 1
+                        }
+                    });
+                });
+
+                // ========================================
+                // RETREAT EDITORIAL — Bellovoire-style depth
+                // ========================================
+                const retreatSection = document.querySelector('.retreat-editorial');
+                const retreatWatermark = document.querySelector('.retreat-watermark');
+                const retreatIntro = document.querySelector('.retreat-intro');
+                const retreatBlocks = gsap.utils.toArray('.retreat-block');
+
+                if (retreatSection && retreatWatermark) {
+                    gsap.fromTo(retreatWatermark,
+                        { y: -120 },
+                        {
+                            y: 120,
+                            ease: 'none',
+                            scrollTrigger: {
+                                trigger: retreatSection,
+                                start: 'top bottom',
+                                end: 'bottom top',
+                                scrub: 1.4
+                            }
+                        }
+                    );
+                }
+
+                if (retreatIntro) {
+                    gsap.from(retreatIntro.querySelectorAll('h2'), {
+                        opacity: 0,
+                        y: 40,
+                        filter: 'blur(12px)',
+                        duration: 1.1,
+                        stagger: 0.12,
+                        ease: 'power3.out',
+                        scrollTrigger: {
+                            trigger: retreatIntro,
+                            start: 'top 78%',
+                            toggleActions: 'play none none none'
+                        }
+                    });
+                }
+
+                retreatBlocks.forEach(block => {
+                    const copy = block.querySelector('.retreat-copy');
+                    const mainImage = block.querySelector('.retreat-image-main');
+                    const secondaryImage = block.querySelector('.retreat-image-secondary');
+                    const images = block.querySelectorAll('.retreat-image-main, .retreat-image-secondary');
+
+                    gsap.from(copy, {
+                        opacity: 0,
+                        x: -60,
+                        y: 20,
+                        filter: 'blur(8px)',
+                        duration: 1.05,
+                        ease: 'power3.out',
+                        scrollTrigger: {
+                            trigger: block,
+                            start: 'top 74%',
+                            toggleActions: 'play none none none'
+                        }
+                    });
+
+                    gsap.from(images, {
+                        opacity: 0,
+                        y: 60,
+                        scale: 0.96,
+                        duration: 1.05,
+                        stagger: 0.16,
+                        ease: 'power3.out',
+                        scrollTrigger: {
+                            trigger: block,
+                            start: 'top 70%',
+                            toggleActions: 'play none none none'
+                        }
+                    });
+
+                    if (mainImage) {
+                        gsap.fromTo(mainImage,
+                            { y: 40 },
+                            {
+                                y: -40,
+                                ease: 'none',
+                                scrollTrigger: {
+                                    trigger: block,
+                                    start: 'top bottom',
+                                    end: 'bottom top',
+                                    scrub: 1.2
+                                }
+                            }
+                        );
+                    }
+
+                    if (secondaryImage) {
+                        gsap.fromTo(secondaryImage,
+                            { y: 80 },
+                            {
+                                y: -30,
+                                ease: 'none',
+                                scrollTrigger: {
+                                    trigger: block,
+                                    start: 'top bottom',
+                                    end: 'bottom top',
+                                    scrub: 1.2
+                                }
+                            }
+                        );
+                    }
+                });
+
+                // Pilar image parallax
+                const parallaxImgs = document.querySelectorAll('[data-parallax-img] img');
+                parallaxImgs.forEach(img => {
+                    gsap.to(img, {
+                        yPercent: -10,
+                        ease: 'none',
+                        scrollTrigger: {
+                            trigger: img.closest('.pilar-image-wrapper'),
+                            start: 'top bottom',
+                            end: 'bottom top',
+                            scrub: 1.5
+                        }
+                    });
+                });
+
+                // ========================================
+                // KINETIC TEXT
+                // ========================================
+                const kineticLeftEls = document.querySelectorAll('[data-kinetic="left"]');
+                const kineticRightEls = document.querySelectorAll('[data-kinetic="right"]');
+
+                [...kineticLeftEls, ...kineticRightEls].forEach(el => {
+                    gsap.fromTo(el,
+                        { opacity: 0, filter: 'blur(28px)' },
+                        {
+                            opacity: 1,
+                            filter: 'blur(0px)',
+                            ease: 'none',
+                            scrollTrigger: {
+                                trigger: el.closest('.kinetic-section'),
+                                start: 'top 120%',
+                                end: 'top 40%',
+                                scrub: 0.8
+                            }
+                        }
+                    );
+                });
+
+                // ========================================
+                // PROGRAMA â€” DIA ITEMS stagger
+                // ========================================
+                const dias = document.querySelectorAll('.dia');
+                dias.forEach((dia, i) => {
+                    gsap.from(dia, {
+                        opacity: 0,
+                        filter: 'blur(8px)',
+                        y: 30,
+                        duration: 1,
+                        delay: i * 0.1,
+                        ease: 'power2.out',
+                        scrollTrigger: {
+                            trigger: dia,
+                            start: 'top 85%',
+                            toggleActions: 'play none none none'
+                        }
+                    });
+                });
+
+                // ========================================
+                // SERVICIOS - Editorial sticky scroll
+                // ========================================
+                const serviciosSection = document.querySelector('.servicios-section');
+                const serviciosViewport = document.querySelector('.servicios-list-viewport');
+                const serviciosTrack = document.querySelector('[data-personalized-services]');
+
+                if (serviciosSection && serviciosViewport && serviciosTrack) {
+                    const serviciosMotion = gsap.matchMedia();
+
+                    function setupServiciosReveal(config) {
+                        const servicioItems = gsap.utils.toArray('.servicios-section .servicio-item');
+                        const servicioReveals = gsap.utils.toArray('.servicios-section .servicio-reveal');
+                        const getTuckedOffset = () => {
+                            const rowHeight = servicioItems[0]?.offsetHeight || config.fallbackHeight;
+                            return -Math.min(config.maxTuck, Math.max(config.minTuck, rowHeight * config.tuckRatio));
+                        };
+
+                        gsap.set(serviciosTrack, { clearProps: 'transform' });
+                        gsap.set(servicioItems, { clearProps: 'transform,opacity,visibility,clipPath,zIndex' });
+                        gsap.set(servicioReveals, { clearProps: 'transform' });
+                        gsap.set(servicioItems, {
+                            zIndex: index => servicioItems.length - index,
+                            autoAlpha: 1,
+                            y: index => index === 0 ? 0 : getTuckedOffset(),
+                            rotation: index => index === 0 ? 0 : config.rotation,
+                            '--reveal-left': index => index === 0 ? '0%' : config.clipLeft,
+                            '--reveal-right': '0%'
+                        });
+                        gsap.set(servicioReveals, {
+                            y: 0,
+                            rotation: 0,
+                            transformOrigin: '50% 0%'
+                        });
+
+                        gsap.set(servicioReveals.slice(1), {
+                            y: config.innerY,
+                            rotation: -config.rotation
+                        });
+
+                        const revealTweens = servicioItems.slice(1).map((item) => {
+                            const reveal = item.querySelector('.servicio-reveal');
+
+                            return gsap.timeline({
+                                scrollTrigger: {
+                                    trigger: item,
+                                    start: config.start,
+                                    end: config.end,
+                                    scrub: 0.9,
+                                    invalidateOnRefresh: true
+                                }
+                            })
+                            .to(item, {
+                                '--reveal-left': '0%',
+                                '--reveal-right': '0%',
+                                y: 0,
+                                rotation: 0,
+                                ease: 'none'
+                            }, 0)
+                            .to(reveal, {
+                                y: 0,
+                                rotation: 0,
+                                ease: 'none'
+                            }, 0);
+                        });
+
+                        return () => {
+                            revealTweens.forEach(tween => tween.kill());
+                        };
+                    }
+
+                    serviciosMotion.add('(min-width: 901px)', () => {
+                        return setupServiciosReveal({
+                            fallbackHeight: 320,
+                            minTuck: 190,
+                            maxTuck: 240,
+                            tuckRatio: 0.72,
+                            rotation: -0.65,
+                            clipLeft: '24%',
+                            innerY: 20,
+                            start: 'top 82%',
+                            end: 'top 56%'
+                        });
+                    });
+
+                    serviciosMotion.add('(max-width: 900px)', () => {
+                        return setupServiciosReveal({
+                            fallbackHeight: 460,
+                            minTuck: 92,
+                            maxTuck: 140,
+                            tuckRatio: 0.34,
+                            rotation: -0.5,
+                            clipLeft: '20%',
+                            innerY: 14,
+                            start: 'top 86%',
+                            end: 'top 62%'
+                        });
+                    });
+                }
+
+                // ========================================
+                // EVERYDAY - Scroll-driven accordion
+                // ========================================
+                const everydaySection = document.querySelector('.everyday-section');
+                const everydaySticky = document.querySelector('.everyday-sticky');
+                const everydayHeading = document.querySelector('.everyday-heading');
+                const everydayImageWrapper = document.querySelector('.everyday-sticky-img-wrapper');
+                const everydayListPanel = document.querySelector('.everyday-list-panel');
+                const activityItems = gsap.utils.toArray('.activity-item');
+                const activityImages = gsap.utils.toArray('.everyday-sticky-img-wrapper img');
+                let activeActivityIndex = 0;
+                let everydayListTravel = 0;
+
+                function setEverydayActive(index) {
+                    if (!activityItems.length) return;
+
+                    const clampedIndex = Math.max(0, Math.min(activityItems.length - 1, index));
+                    activeActivityIndex = clampedIndex;
+
+                    activityItems.forEach((item, i) => {
+                        item.classList.toggle('active', i === clampedIndex);
+                    });
+
+                    activityImages.forEach((img, i) => {
+                        img.classList.toggle('active', i === clampedIndex);
+                    });
+                }
+
+                function measureEverydayTravel() {
+                    if (!everydayListPanel || !everydayImageWrapper || !activityItems.length) return;
+
+                    gsap.set(everydayListPanel, { y: 0 });
+                    const lastItem = activityItems[activityItems.length - 1];
+                    const lastItemBottom = lastItem.getBoundingClientRect().bottom;
+                    const imageBottom = everydayImageWrapper.getBoundingClientRect().bottom;
+                    everydayListTravel = Math.max(0, lastItemBottom - imageBottom);
+                }
+
+                const isMobileEveryday = window.matchMedia('(max-width: 900px)').matches;
+                const isCompactMobileEveryday = window.matchMedia('(max-width: 768px)').matches;
+
+                if (everydaySection && activityItems.length) {
+                    if (isMobileEveryday) {
+                        if (isCompactMobileEveryday) {
+                            let mobileEverydayFrame = null;
+
+                            const updateActiveMobileExperienceItem = () => {
+                                const list = document.querySelector('.everyday-list-col');
+                                const titles = activityItems.map(item => item.querySelector('h3'));
+                                if (!list || !titles.length) return;
+
+                                const rect = list.getBoundingClientRect();
+                                const activationLine = window.innerHeight * 0.50;
+                                const start = window.innerHeight * 0.65;
+                                const totalDistance = start - activationLine + rect.height;
+                                const progress = gsap.utils.clamp(
+                                    0,
+                                    1,
+                                    (start - rect.top) / totalDistance
+                                );
+                                const activeIndex = Math.round(progress * (titles.length - 1));
+
+                                activityItems.forEach(item => {
+                                    item.classList.remove('active');
+                                    item.querySelector('h3').classList.remove('is-active-mobile');
+                                });
+
+                                titles[activeIndex].classList.add('is-active-mobile');
+                            };
+
+                            const requestMobileEverydayUpdate = () => {
+                                if (mobileEverydayFrame) return;
+                                mobileEverydayFrame = window.requestAnimationFrame(() => {
+                                    updateActiveMobileExperienceItem();
+                                    mobileEverydayFrame = null;
+                                });
+                            };
+
+                            updateActiveMobileExperienceItem();
+                            window.addEventListener('scroll', requestMobileEverydayUpdate, { passive: true });
+                            window.addEventListener('resize', requestMobileEverydayUpdate);
+                        } else {
+                            activityItems.forEach(item => {
+                                const title = item.querySelector('h3');
+                                item.classList.remove('active');
+
+                                gsap.fromTo(title, {
+                                    color: '#c7c7c7'
+                                }, {
+                                    color: '#111111',
+                                    ease: 'none',
+                                    scrollTrigger: {
+                                        trigger: item,
+                                        start: 'top 82%',
+                                        end: 'top 52%',
+                                        scrub: 0.55,
+                                        invalidateOnRefresh: true
+                                    }
+                                });
+                            });
+                        }
+                    } else {
+                        activityItems.forEach((item, index) => {
+                            const title = item.querySelector('h3');
+                            gsap.set(title, { clearProps: 'color' });
+                            item.classList.toggle('active', index === 0);
+                        });
+
+                        setEverydayActive(0);
+                        measureEverydayTravel();
+
+                        ScrollTrigger.create({
+                            trigger: everydaySticky,
+                            start: 'top top',
+                            end: () => {
+                                const sectionStyles = getComputedStyle(everydaySection);
+                                const outerSpacing =
+                                    parseFloat(sectionStyles.borderTopWidth) +
+                                    parseFloat(sectionStyles.borderBottomWidth);
+                                const scrollDistance = Math.max(
+                                    window.innerHeight,
+                                    everydaySection.offsetHeight - everydaySticky.offsetHeight - outerSpacing
+                                );
+                                return `+=${scrollDistance}`;
+                            },
+                            scrub: 0.35,
+                            invalidateOnRefresh: true,
+                            onRefreshInit: measureEverydayTravel,
+                            onUpdate: self => {
+                                const progress = self.progress;
+                                const index = Math.min(
+                                    activityItems.length - 1,
+                                    Math.floor(progress * activityItems.length)
+                                );
+                                const headingProgress = gsap.utils.clamp(0, 1, progress / 0.14);
+
+                                setEverydayActive(index);
+                                gsap.set(everydayListPanel, {
+                                    y: -everydayListTravel * progress
+                                });
+                                gsap.set(everydayHeading, {
+                                    y: -everydayHeading.offsetHeight * headingProgress,
+                                    opacity: 1 - headingProgress
+                                });
+                                gsap.set(everydayImageWrapper, {
+                                    clipPath: `inset(0 0 ${14 * (1 - gsap.utils.clamp(0, 1, progress / 0.08))}% 0)`
+                                });
+                            }
+                        });
+                    }
+                }
+
+                const stripeCta = document.querySelector('[data-stripe-payment-link]');
+                if (stripeCta) {
+                    const stripePaymentLink = stripeCta.dataset.stripePaymentLink;
+                    if (stripePaymentLink) {
+                        stripeCta.href = stripePaymentLink;
+                    } else {
+                        stripeCta.addEventListener('click', event => event.preventDefault());
+                    }
+                }
+
+                // ========================================
+                // GALERÃA â€” Drag carousel
+                // ========================================
+                const galleryTrack = document.getElementById('galleryTrack');
+                if (galleryTrack) {
+                    const galleryCarousel = galleryTrack.parentElement;
+                    const galleryImages = [
+                        { base: 'assets/images/galeria/galeria-01', src: 'https://images.unsplash.com/photo-1582719508461-905c673771fd?w=960&q=80&auto=format&fit=crop', alt: 'Villa privada en MÃ©xico' },
+                        { base: 'assets/images/galeria/galeria-02', src: 'https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=960&q=80&auto=format&fit=crop', alt: 'JardÃ­n y piscina de hacienda' },
+                        { base: 'assets/images/galeria/galeria-03', src: 'https://images.unsplash.com/photo-1540518614846-7eded433c457?w=960&q=80&auto=format&fit=crop', alt: 'Cena privada de alta gastronomÃ­a' },
+                        { base: 'assets/images/galeria/galeria-04', src: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=960&q=80&auto=format&fit=crop', alt: 'Interior de lujo' },
+                        { base: 'assets/images/galeria/galeria-05', src: 'https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=960&q=80&auto=format&fit=crop', alt: 'Amanecer en la naturaleza mexicana' },
+                        { base: 'assets/images/galeria/galeria-06', src: 'https://images.unsplash.com/photo-1552252059-8b1cd9019f5e?w=960&q=80&auto=format&fit=crop', alt: 'Atardecer de paz y lujo silencioso' },
+                        { base: 'assets/images/galeria/galeria-07', src: 'https://images.unsplash.com/photo-1504701954957-2010ec3bcec1?w=960&q=80&auto=format&fit=crop', alt: 'Experiencia gastronÃ³mica' }
+                    ];
+                    const originalGalleryLength = galleryImages.length;
+                    const loopGalleryImages = [...galleryImages, ...galleryImages, ...galleryImages];
+
+                    galleryTrack.innerHTML = loopGalleryImages.map((img, index) =>
+                        `<div class="gallery-slide"><img src="${img.base}.webp" data-image-base="${img.base}" data-image-fallback="${img.src}" alt="${img.alt}" loading="${index >= originalGalleryLength - 1 && index <= originalGalleryLength + 3 ? 'eager' : 'lazy'}" decoding="async"></div>`
+                    ).join('');
+
+                    const slides = galleryTrack.children;
+                    const totalSlides = slides.length;
+
+                    let gap = 36;
+                    let slotWidth = 620 + gap;
+                    let isDragging = false;
+                    let currentX = 0;
+                    let startX = 0;
+                    let prevX = 0;
+                    let imgWidth = 620;
+                    let activeGalleryIndex = originalGalleryLength + (window.innerWidth <= 600 ? 0 : 1);
+                    let autoplayTimer = null;
+                    let resumeTimer = null;
+
+                    function measureSlides() {
+                        if (slides.length > 0) {
+                            const styles = getComputedStyle(galleryTrack);
+                            gap = parseFloat(styles.columnGap || styles.gap) || gap;
+                            imgWidth = slides[0].offsetWidth || 620;
+                            slotWidth = imgWidth + gap;
+                        }
+                    }
+
+                    function getTargetX(index) {
+                        const w = galleryTrack.parentElement.offsetWidth;
+                        return w / 2 - index * slotWidth - imgWidth / 2;
+                    }
+
+                    const setX = gsap.quickSetter(galleryTrack, 'x', 'px');
+
+                    function updateScales() {
+                        const w = galleryTrack.parentElement.offsetWidth;
+                        const cx = w / 2;
+                        const threshold = w * 0.65;
+                        const isMobile = window.innerWidth <= 700;
+                        const baseScale = isMobile ? 0.9 : 0.84;
+                        const activeScale = isMobile ? 1 : 1.12;
+                        let nearestIndex = 0;
+                        let nearestDistance = Infinity;
+
+                        for (let i = 0; i < totalSlides; i++) {
+                            const sc = i * slotWidth + imgWidth / 2 + currentX;
+                            const dist = Math.abs(sc - cx);
+                            if (dist < nearestDistance) {
+                                nearestDistance = dist;
+                                nearestIndex = i;
+                            }
+
+                            const prox = Math.max(0, 1 - dist / threshold);
+                            const s = baseScale + (activeScale - baseScale) * prox;
+                            slides[i].style.transform = `scale(${s})`;
+                            slides[i].style.opacity = 0.9 + 0.1 * prox;
+                            slides[i].style.zIndex = Math.round(prox * 10);
+                        }
+
+                        activeGalleryIndex = nearestIndex;
+                        for (let i = 0; i < totalSlides; i++) {
+                            slides[i].classList.toggle('active', i === nearestIndex);
+                        }
+                    }
+
+                    function setPosition(x) {
+                        currentX = x;
+                        setX(x);
+                    }
+
+                    function normalizeIndex(index) {
+                        if (index >= originalGalleryLength * 2) return index - originalGalleryLength;
+                        if (index < originalGalleryLength) return index + originalGalleryLength;
+                        return index;
+                    }
+
+                    function normalizeLoopPosition() {
+                        const normalizedIndex = normalizeIndex(activeGalleryIndex);
+                        if (normalizedIndex !== activeGalleryIndex) {
+                            activeGalleryIndex = normalizedIndex;
+                            setPosition(getTargetX(activeGalleryIndex));
+                            updateScales();
+                        }
+                    }
+
+                    function getNearest() {
+                        const w = galleryTrack.parentElement.offsetWidth;
+                        const cx = w / 2;
+                        let md = Infinity, ni = 0;
+                        for (let i = 0; i < totalSlides; i++) {
+                            const sc = i * slotWidth + imgWidth / 2 + currentX;
+                            const d = Math.abs(sc - cx);
+                            if (d < md) { md = d; ni = i; }
+                        }
+                        return ni;
+                    }
+
+                    function animateTo(index, duration = 0.8) {
+                        activeGalleryIndex = index;
+                        const targetX = getTargetX(index);
+                        gsap.to(galleryTrack, {
+                            x: targetX,
+                            duration,
+                            ease: 'power3.out',
+                            overwrite: 'auto',
+                            force3D: true,
+                            onUpdate: function () {
+                                currentX = gsap.getProperty(galleryTrack, 'x');
+                                updateScales();
+                            },
+                            onComplete: function () {
+                                currentX = targetX;
+                                updateScales();
+                                normalizeLoopPosition();
+                            }
+                        });
+                    }
+
+                    function stopAutoplay() {
+                        window.clearInterval(autoplayTimer);
+                        window.clearTimeout(resumeTimer);
+                        autoplayTimer = null;
+                    }
+
+                    function startAutoplay(delay = 0) {
+                        stopAutoplay();
+                        resumeTimer = window.setTimeout(() => {
+                            if (isDragging) return;
+                            autoplayTimer = window.setInterval(() => {
+                                if (!isDragging) {
+                                    animateTo(activeGalleryIndex + 1, 0.8);
+                                }
+                            }, 2000);
+                        }, delay);
+                    }
+
+                    function onPointerDown(e) {
+                        if (gsap.isTweening(galleryTrack)) gsap.killTweensOf(galleryTrack);
+                        e.preventDefault();
+                        stopAutoplay();
+                        isDragging = true;
+                        startX = e.pageX;
+                        prevX = currentX;
+                        galleryCarousel.setPointerCapture(e.pointerId);
+                        galleryCarousel.style.cursor = 'grabbing';
+                        galleryTrack.style.cursor = 'grabbing';
+                    }
+
+                    function onPointerMove(e) {
+                        if (!isDragging) return;
+                        e.preventDefault();
+                        const diff = e.pageX - startX;
+                        const nx = prevX + diff;
+                        setPosition(nx);
+                        updateScales();
+                    }
+
+                    function onPointerUp(e) {
+                        if (!isDragging) return;
+                        isDragging = false;
+                        galleryCarousel.style.cursor = 'grab';
+                        galleryTrack.style.cursor = 'grab';
+                        if (galleryCarousel.hasPointerCapture(e.pointerId)) {
+                            galleryCarousel.releasePointerCapture(e.pointerId);
+                        }
+                        animateTo(getNearest(), 0.68);
+                        startAutoplay(1000);
+                    }
+
+                    measureSlides();
+                    setPosition(getTargetX(activeGalleryIndex));
+                    updateScales();
+                    startAutoplay(1200);
+
+                    galleryCarousel.addEventListener('pointerdown', onPointerDown);
+                    galleryCarousel.addEventListener('pointermove', onPointerMove);
+                    galleryCarousel.addEventListener('pointerup', onPointerUp);
+                    galleryCarousel.addEventListener('pointercancel', onPointerUp);
+
+                    window.addEventListener('resize', () => {
+                        measureSlides();
+                        activeGalleryIndex = normalizeIndex(activeGalleryIndex);
+                        setPosition(getTargetX(activeGalleryIndex));
+                        updateScales();
+                    });
+                }
+
+                // ========================================
+                // SCROLL INDICATOR FADE OUT
+                // ========================================
+                gsap.to('#scrollIndicator', {
+                    opacity: 0,
+                    scrollTrigger: {
+                        trigger: '#hero',
+                        start: 'top top',
+                        end: '30% top',
+                        scrub: 1
+                    }
+                });
+
+            } // end initAnimations
+
+
+            // ========================================
+            // HAMBURGER MENU
+            // ========================================
+            const hamburger = document.getElementById('hamburger');
+            const mobileMenu = document.getElementById('mobileMenu');
+            const menuLinks = document.querySelectorAll('.menu-link');
+
+            hamburger.addEventListener('click', () => {
+                hamburger.classList.toggle('active');
+                mobileMenu.classList.toggle('active');
+                document.body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : '';
+            });
+
+            menuLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    hamburger.classList.remove('active');
+                    mobileMenu.classList.remove('active');
+                    document.body.style.overflow = '';
+                });
+            });
+
+
+            // ========================================
+            // SMOOTH SCROLL for anchors
+            // ========================================
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        const offset = 0;
+                        const top = target.getBoundingClientRect().top + window.pageYOffset - offset;
+                        window.scrollTo({ top, behavior: 'smooth' });
+                    }
+                });
+            });
+
+        });
+    </script>
+
+</body>
+</html>

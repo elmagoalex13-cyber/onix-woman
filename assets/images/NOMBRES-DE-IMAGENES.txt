@@ -1,0 +1,91 @@
+COMO USAR
+==========
+Guarda cada imagen en la carpeta indicada usando exactamente el nombre base.
+Puedes utilizar cualquiera de estas extensiones:
+.webp, .avif, .png, .jpg, .jpeg, .jfif, .gif, .svg o .bmp
+
+Ejemplo:
+assets/images/galeria/galeria-01.jpg
+assets/images/galeria/galeria-02.webp
+
+No necesitas modificar el HTML al cambiar de formato.
+HEIC, TIFF y archivos RAW deben convertirse antes porque los navegadores
+no los muestran de forma compatible.
+
+
+HERO
+====
+assets/images/hero/hero-principal
+
+
+SECCION "NO NECESITAS EMPEZAR DE NUEVO"
+=======================================
+assets/images/metodo/mujer-detras-principal
+assets/images/metodo/mujer-detras-secundaria
+assets/images/metodo/cuerpo-principal
+assets/images/metodo/cuerpo-secundaria
+assets/images/metodo/vida-principal
+assets/images/metodo/vida-secundaria
+
+
+FRASES SOBRE IMAGEN
+===================
+assets/images/kinetic/soltar-para-volver
+assets/images/kinetic/riqueza-seguir-siendo-tu
+
+
+SECCION "VOLVER A TI TAMBIEN REQUIERE METODO"
+=============================================
+assets/images/metodo-rebeca/volver-a-ti
+
+
+SECCION "QUE INCLUYE"
+=====================
+assets/images/servicios/metodo-onix
+assets/images/servicios/ritual-origen
+assets/images/servicios/diagnostico-cuantico
+assets/images/servicios/gastronomia-funcional
+assets/images/servicios/plan-30-dias
+assets/images/servicios/integracion-privada
+
+
+SECCION "CUATRO DIAS"
+=====================
+Escucha corporal:
+assets/images/cuatro-dias/escucha-corporal
+
+Claridad emocional:
+assets/images/cuatro-dias/claridad-emocional
+
+Descanso profundo:
+assets/images/cuatro-dias/descanso-profundo
+
+Reconexión femenina:
+assets/images/cuatro-dias/reconexion-femenina
+
+Ritual Ónix Woman:
+assets/images/cuatro-dias/ritual-onix-woman
+
+Plan de 30 días:
+assets/images/cuatro-dias/plan-30-dias
+
+Cada mujer vuelve con una decisión:
+assets/images/cuatro-dias/decision-final
+
+
+GALERIA
+=======
+assets/images/galeria/galeria-01
+assets/images/galeria/galeria-02
+assets/images/galeria/galeria-03
+assets/images/galeria/galeria-04
+assets/images/galeria/galeria-05
+assets/images/galeria/galeria-06
+assets/images/galeria/galeria-07
+
+
+NOTA
+====
+Si una imagen local no existe, la web mantiene temporalmente la imagen
+de respaldo actual. Al añadir tu archivo con uno de los nombres anteriores,
+se mostrara automaticamente al recargar la pagina.
