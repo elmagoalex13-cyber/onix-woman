@@ -2180,8 +2180,63 @@
         }
 
         @media (max-width: 600px) {
+            .hero {
+                height: 100svh;
+                min-height: 620px;
+            }
+
+            .hero-image-wrapper {
+                height: 112%;
+            }
+
+            .hero-overlay {
+                background: linear-gradient(
+                    180deg,
+                    rgba(23, 15, 11, 0.08) 0%,
+                    rgba(23, 15, 11, 0.04) 30%,
+                    rgba(23, 15, 11, 0.34) 55%,
+                    rgba(23, 15, 11, 0.76) 82%,
+                    rgba(23, 15, 11, 0.88) 100%
+                );
+            }
+
+            .hero-content {
+                width: 100%;
+                padding: 0 20px clamp(112px, 16vh, 148px);
+            }
+
+            .hero-tagline {
+                font-size: 11px;
+                line-height: 1.45;
+                letter-spacing: 0.22em;
+                margin-bottom: 24px;
+            }
+
             .hero-title {
-                font-size: clamp(62px, 17vw, 108px);
+                font-size: clamp(62px, 18vw, 92px);
+                line-height: 0.88;
+            }
+
+            .hero-subtitle {
+                max-width: 350px;
+                margin: 20px auto 0;
+                font-size: 10px;
+                line-height: 1.65;
+                letter-spacing: 0.2em;
+                color: rgba(237, 233, 228, 0.82);
+            }
+
+            .scroll-indicator {
+                bottom: 16px;
+            }
+
+            .scroll-indicator span {
+                font-size: 8px;
+                letter-spacing: 0.22em;
+            }
+
+            .scroll-line {
+                height: 24px;
             }
 
             .bienvenida h2 {
@@ -2438,7 +2493,7 @@
             <p class="hero-subtitle" id="heroSubtitle">20 AL 23 DE AGOSTO · 4 DÍAS / 3 NOCHES · SOLO 8 MUJERES · INVERSIÓN 9.800 €</p>
         </div>
         <div class="scroll-indicator" id="scrollIndicator">
-            <span>SOLICITAR PLAZA PRIVADA</span>
+            <a href="https://wa.me/34663366020?text=Hola%2C%20me%20gustar%C3%ADa%20reservar%20mi%20plaza%20en%20el%20Retiro%20%C3%93nix%20Woman%20RH%20de%20agosto." target="_blank" rel="noopener noreferrer"><span>SOLICITAR PLAZA PRIVADA</span></a>
             <div class="scroll-line"></div>
         </div>
     </section>
@@ -2779,7 +2834,7 @@
                     </div>
 
                     <p class="reserva-payment-copy">La reserva inicial confirma tu plaza. El segundo pago se completará posteriormente mediante enlace privado.</p>
-                    <a class="reserva-cta" href="#" data-stripe-payment-link aria-label="Solicitar plaza privada mediante Stripe">Solicitar plaza privada</a>
+                    <a class="reserva-cta" href="https://wa.me/34663366020?text=Hola%2C%20me%20gustar%C3%ADa%20reservar%20mi%20plaza%20en%20el%20Retiro%20%C3%93nix%20Woman%20RH%20de%20agosto." target="_blank" rel="noopener noreferrer" aria-label="Solicitar plaza privada mediante WhatsApp">Solicitar plaza privada</a>
                     <p class="reserva-secure">Plazas limitadas por privacidad, acompañamiento individual y calidad de experiencia.</p>
                 </div>
             </div>
