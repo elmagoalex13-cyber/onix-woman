@@ -1,11 +1,10 @@
 COMO USAR
 ==========
 Guarda cada imagen en la carpeta indicada usando exactamente el nombre base.
-Puedes utilizar cualquiera de estas extensiones:
-.webp, .avif, .png, .jpg, .jpeg, .jfif, .gif, .svg o .bmp
+Utiliza la extension .webp.
 
 Ejemplo:
-assets/images/galeria/galeria-01.jpg
+assets/images/galeria/galeria-01.webp
 assets/images/galeria/galeria-02.webp
 
 No necesitas modificar el HTML al cambiar de formato.
